@@ -1,23 +1,35 @@
 package com.flexshose.flexshoesbackend.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
-public class ProductCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryId;
-    private String categoryName;
-    private String description;
+@Table(name = "PRODUCT_CATEGORY")
 
-    @OneToMany(mappedBy = "productCategory")
-    private List<Product> products;
+public class ProductCategory implements Serializable {
+    /**
+     *
+     */
+
+
+    @Id
+    @Column(name = "CATEGORY_ID", columnDefinition = "nvarchar(55)")
+    private String categoryId;
+
+    @Column(name = "CATEGORY_NAME", columnDefinition = "nvarchar(55)")
+    @NotNull(message = "Category name cannot be empty")
+    private String categoryName;
+
+    @Column(name = "DESCRIPTION", columnDefinition = "nvarchar(255)")
+    private String description;
 }
+

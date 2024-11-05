@@ -3,49 +3,57 @@ package com.flexshose.flexshoesbackend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Product {
+@Entity
+@Table(name = "PRODUCT")
+public class Product implements Serializable {
+
+    // Fields
+    private static final long serialVersionUID = 8124213137126012314L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    @Column(name = "PRODUCT_ID", columnDefinition = "int", updatable = false, insertable = false)
+    private Integer productId;
+
+    @Column(name = "PRODUCT_NAME", columnDefinition = "nvarchar(55)")
     private String productName;
-    private double Price;
+
+    @Column(name = "DESCRIPTION", columnDefinition = "nvarchar(255)")
     private String description;
-    private boolean status;
-    private float discount;
-    private int quantity;
-    private boolean gender;
 
-    @ElementCollection
-    private Map<String, Integer> colors;
+    @Column(name = "ORIGINAL_PRICE")
+    private double originalPrice;
 
-    @ElementCollection
-    private Map<String, Integer> sizes;
+    @Column(name = "STATUS", columnDefinition = "nvarchar(25)")
+    private String status;
 
-    private double tax;
+    @Column(name = "SALE_PRICE")
     private double salePrice;
 
-    @OneToMany(mappedBy = "product")
-    @ToString.Exclude
-    private List<Image> images;
+    @Column(name = "VAT")
+    private double vat;
 
-    // Add the missing field and mapping for ProductCategory
-    @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @ElementCollection
+    @CollectionTable(name = "IMAGES", joinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    @Column(name = "IMAGE")
+    private Set<String> images;
+
+    // Mapping
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID", nullable = true)
     private ProductCategory productCategory;
 
-    // Add the missing field and mapping for Brand
-    @ManyToOne
-    @JoinColumn(name = "brandId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BRAND_ID", nullable = true)
     private Brand brand;
-
-
 }

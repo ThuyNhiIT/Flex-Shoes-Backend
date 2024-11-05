@@ -12,7 +12,7 @@ public class ProductMapper {
 //        productDto.setProductId(product.getProductId());
         productDto.setProductName(product.getProductName());
         productDto.setDescription(product.getDescription());
-        productDto.setPrice(product.getPrice());
+//        productDto.setPrice(product.getPrice());
 //        productDto.setCategoryId(product.getProductCategory().getCategoryId());
 //        productDto.setBrandId(product.getBrand().getBrandId());
 //        productDto.setImageUrls(product.getImages().stream().map(image -> image.getUrl()).collect(Collectors.toList()));
@@ -24,7 +24,7 @@ public class ProductMapper {
 //        product.setProductId(productDto.getProductId());
         product.setProductName(productDto.getProductName());
         product.setDescription(productDto.getDescription());
-        product.setPrice(productDto.getPrice());
+//        product.setPrice(productDto.getPrice());
         //image
 //        productDto.getImageUrls().forEach(imageUrl -> {
 //            Image image = new Image();

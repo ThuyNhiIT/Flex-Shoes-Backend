@@ -3,20 +3,27 @@ package com.flexshose.flexshoesbackend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+import java.io.Serializable;
+
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Brand {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int brandId;
-    private String brandName;
-    private String description;
+@NoArgsConstructor
+@Entity
+@Table(name = "BRAND")
+public class Brand implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-    @ManyToOne
-    @JoinColumn(name = "productId")
-    private Product product;
+    @Id
+    @Column(name = "BRAND_ID", columnDefinition = "nvarchar(55)")
+    private String brandId;
+
+    @Column(name = "BRAND_NAME", columnDefinition = "nvarchar(55)")
+    private String brandName;
+
+    @Column(name = "DESCRIPTION", columnDefinition = "nvarchar(255)")
+    private String description;
 }
