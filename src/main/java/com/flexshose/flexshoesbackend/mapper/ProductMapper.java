@@ -1,10 +1,8 @@
 package com.flexshose.flexshoesbackend.mapper;
 
 import com.flexshose.flexshoesbackend.dto.ProductDto;
-import com.flexshose.flexshoesbackend.entity.Image;
 import com.flexshose.flexshoesbackend.entity.Product;
 
-import java.util.stream.Collectors;
 
 public class ProductMapper {
     public static ProductDto mapToProductDto(Product product) {
