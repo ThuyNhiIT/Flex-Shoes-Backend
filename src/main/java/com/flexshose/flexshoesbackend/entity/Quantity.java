@@ -38,6 +38,8 @@ public class Quantity implements Serializable {
     @Column(name = "QUANTITY")
     private int quantity;
 
-    @Column(name = "GENDER")
-    private Gender gender;
+    
+//    Khong dung den field nay
+//    @Column(name = "GENDER")
+//    private Gender gender;
 }

@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Getter
@@ -47,13 +45,16 @@ public class Product implements Serializable {
     @CollectionTable(name = "IMAGES", joinColumns = @JoinColumn(name = "PRODUCT_ID"))
     @Column(name = "IMAGE")
     private Set<String> images;
-
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "GENDER", columnDefinition = "nvarchar(10)")
+    private Gender gender;
     // Mapping
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID", nullable = true)
+    @JoinColumn(name = "CATEGORY_ID")
     private ProductCategory productCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BRAND_ID", nullable = true)
+    @JoinColumn(name = "BRAND_ID")
     private Brand brand;
 }

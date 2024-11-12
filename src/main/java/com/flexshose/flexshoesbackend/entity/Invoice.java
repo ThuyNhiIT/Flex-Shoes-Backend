@@ -13,7 +13,12 @@ import java.time.LocalDate;
 @ToString
 @Table(name = "INVOICE")
 public class Invoice implements Serializable {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "INVOICE_ID", columnDefinition = "int", updatable = false, insertable = false)
     private Integer invoiceId;

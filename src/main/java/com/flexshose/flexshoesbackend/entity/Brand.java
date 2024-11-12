@@ -18,7 +18,7 @@ public class Brand implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "BRAND_ID", columnDefinition = "nvarchar(55)")
+    @Column(name = "BRAND_ID")
     private String brandId;
 
     @Column(name = "BRAND_NAME", columnDefinition = "nvarchar(55)")

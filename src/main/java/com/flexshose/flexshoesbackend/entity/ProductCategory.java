@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,12 +15,17 @@ import java.util.List;
 
 public class ProductCategory implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      *
      */
 
 
     @Id
-    @Column(name = "CATEGORY_ID", columnDefinition = "nvarchar(55)")
+    @Column(name = "CATEGORY_ID")
     private String categoryId;
 
     @Column(name = "CATEGORY_NAME", columnDefinition = "nvarchar(55)")
