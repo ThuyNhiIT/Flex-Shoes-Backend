@@ -67,8 +67,8 @@ INSERT INTO Product (product_name, [description], original_price, [status], sale
 ('ASICS Gel-Game 9', 'Supportive running shoes', 140.00, 'Available', 125.00, 10.0,  'CT004', 'BR009', 'MEN'),
 ('Under Armour Infinite Pro 3027190-101', 'Lightweight training shoes', 100.00, 'Available', 85.00, 10.0, 'CT004', 'BR008', 'WOMEN'),
 ('Reebok DMX Series 2K DV9724', 'Cross-training shoes for gym', 130.00, 'Available', 115.00, 10.0, 'CT004', 'BR005', 'WOMEN'),
-('Fila Unisex Scanline Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 80.00, 10.0, 'CT005', 'BR010', 'Unisex'),
-('Fila Unisex Como Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 80.00, 10.0, 'CT005','BR010',  'Unisex');
+('Fila Unisex Scanline Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 80.00, 10.0, 'CT005', 'BR010', 'UNISEX'),
+('Fila Unisex Como Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 80.00, 10.0, 'CT005','BR010',  'UNISEX');
 
 select * from product
 
