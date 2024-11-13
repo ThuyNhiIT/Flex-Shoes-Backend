@@ -56,19 +56,19 @@ INSERT INTO Size (size_name) VALUES
 
 select * from size
 
-INSERT INTO Product (product_name, [description], original_price, [status], sale_price, vat, category_id, brand_id,[gender]) VALUES
-('Nike Air Max', 'Comfortable and stylish sneakers', 120.00, 'Available', 100.00, 10.0,  'CT004', 'BR001', 'MEN'),
-('Nike Air Force 1 Shadow', 'Comfortable and stylish sneakers', 120.00, 'Available', 100.00, 10.0,  'CT004', 'BR001','MEN'),
-('Adidas Ultraboost', 'High-performance running shoes', 150.00, 'Available', 130.00, 10.0, 'CT004', 'BR002','MEN'),
-('Puma RS-X', 'Retro-style chunky sneakers', 110.00, 'Available', 95.00, 10.0, 'CT005', 'BR003', 'MEN'),
-('Converse All Star Trekwave', 'Classic high-top sneakers', 60.00, 'Available', 55.00, 10.0,  'CT005', 'BR006', 'WOMEN'),
-('New Balance 550', 'Casual and comfortable sneakers', 80.00, 'Available', 70.00, 10.0,  'CT005', 'BR004', 'MEN'),
-('Vans Old Skool Stackform Canvas Black', 'Popular skateboarding shoes', 50.00, 'Available', 45.00, 10.0, 'CT005', 'BR007', 'MEN'),
-('ASICS Gel-Game 9', 'Supportive running shoes', 140.00, 'Available', 125.00, 10.0,  'CT004', 'BR009', 'MEN'),
-('Under Armour Infinite Pro 3027190-101', 'Lightweight training shoes', 100.00, 'Available', 85.00, 10.0, 'CT004', 'BR008', 'WOMEN'),
-('Reebok DMX Series 2K DV9724', 'Cross-training shoes for gym', 130.00, 'Available', 115.00, 10.0, 'CT004', 'BR005', 'WOMEN'),
-('Fila Unisex Scanline Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 80.00, 10.0, 'CT005', 'BR010', 'Unisex'),
-('Fila Unisex Como Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 80.00, 10.0, 'CT005','BR010',  'Unisex');
+INSERT INTO Product (product_name, [description], original_price, [status], sale_price, vat, category_id, brand_id, [gender]) VALUES
+                                                                                                                                  ('Nike Air Max', 'Comfortable and stylish sneakers', 120.00, 'Available', 5.00, 10.0, 'CT004', 'BR001', 'MEN'),
+                                                                                                                                  ('Nike Air Force 1 Shadow', 'Comfortable and stylish sneakers', 120.00, 'Available', 10.00, 10.0, 'CT004', 'BR001', 'MEN'),
+                                                                                                                                  ('Adidas Ultraboost', 'High-performance running shoes', 150.00, 'Available', 15.00, 10.0, 'CT004', 'BR002', 'MEN'),
+                                                                                                                                  ('Puma RS-X', 'Retro-style chunky sneakers', 110.00, 'Available', 20.00, 10.0, 'CT005', 'BR003', 'MEN'),
+                                                                                                                                  ('Converse All Star Trekwave', 'Classic high-top sneakers', 60.00, 'Available', 25.00, 10.0, 'CT005', 'BR006', 'WOMEN'),
+                                                                                                                                  ('New Balance 550', 'Casual and comfortable sneakers', 80.00, 'Available', 30.00, 10.0, 'CT005', 'BR004', 'MEN'),
+                                                                                                                                  ('Vans Old Skool Stackform Canvas Black', 'Popular skateboarding shoes', 50.00, 'Available', 35.00, 10.0, 'CT005', 'BR007', 'MEN'),
+                                                                                                                                  ('ASICS Gel-Game 9', 'Supportive running shoes', 140.00, 'Available', 40.00, 10.0, 'CT004', 'BR009', 'MEN'),
+                                                                                                                                  ('Under Armour Infinite Pro 3027190-101', 'Lightweight training shoes', 100.00, 'Available', 45.00, 10.0, 'CT004', 'BR008', 'WOMEN'),
+                                                                                                                                  ('Reebok DMX Series 2K DV9724', 'Cross-training shoes for gym', 130.00, 'Available', 50.00, 10.0, 'CT004', 'BR005', 'WOMEN'),
+                                                                                                                                  ('Fila Unisex Scanline Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 55.00, 10.0, 'CT005', 'BR010', 'Unisex'),
+                                                                                                                                  ('Fila Unisex Como Mule', 'Chunky retro-style sneakers', 90.00, 'Available', 60.00, 10.0, 'CT005', 'BR010', 'Unisex');
 
 select * from product
 
