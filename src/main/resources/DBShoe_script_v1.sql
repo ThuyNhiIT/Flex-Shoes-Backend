@@ -75,7 +75,7 @@ select * from product
 INSERT INTO Images (product_id, [image]) VALUES
 (1, 'https://localhost:8080/images/nike-air-max-trang-xanh-1.png'),
 (1, 'https://localhost:8080/images/nike-air-max-trang-xanh-2.png'),
-(1, 'https://localhost:8080/images/nike-air-max-trang-xanh-3.png'),
+(1, '00'),
 (1, 'https://localhost:8080/images/nike-air-max-trang-xanh-4.png'),
 (1, 'https://localhost:8080/images/nike-air-max-trang-xanh-5.png'),
 (2, 'https://localhost:8080/images/nike-air-force1-do-trang-1.png'),
