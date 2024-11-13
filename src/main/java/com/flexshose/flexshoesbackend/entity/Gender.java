@@ -1,7 +1,7 @@
 package com.flexshose.flexshoesbackend.entity;
 
 public enum Gender {
-    MEN("MEN"), WOMEN("WOMEN"), KIDS("KIDS");
+    MEN("MEN"), WOMEN("WOMEN"), UNISEX("UNISEX");
     
     private final String value;
 
