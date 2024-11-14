@@ -27,8 +27,8 @@ public class ListingProductServiceImpl implements ListingProductService {
     private EntityManager entityManager;
 
     @Override
-    public List<ListingProductDto> filterProductsByCriteria(String[] colors, String[] sizes, String[] brands,String[] category, String[] genders, double minPrice, double maxPrice) {
-        StringBuilder queryBuilder = new StringBuilder("SELECT p FROM Product p JOIN p.quantities q JOIN q.color c JOIN q.size s JOIN p.brand b JOIN p.productCategory pc WHERE q.quantity > 0");
+    public List<ListingProductDto> filterProductsByCriteria(String[] colors, String[] sizes, String[] brands, String[] category, String[] genders, double minPrice, double maxPrice) {
+        StringBuilder queryBuilder = new StringBuilder("SELECT p FROM Product p JOIN p.quantities q JOIN q.color c JOIN q.size s JOIN p.brand b JOIN p.productCategory pc WHERE q.quantity > 0 AND p.status = 'Available'");
 
         // Add color filter
         if (colors != null && colors.length > 0) {
@@ -45,16 +45,23 @@ public class ListingProductServiceImpl implements ListingProductService {
             queryBuilder.append(" AND b.brandName IN :brands");
         }
 
-        // Add gender filter
+        // Normalize gender values to match enum constants
         if (genders != null && genders.length > 0) {
+            genders = Arrays.stream(genders)
+                            .map(String::toUpperCase) // Convert to uppercase
+                            .toArray(String[]::new);
             queryBuilder.append(" AND p.gender IN :genders");
         }
-        //Add category
-        if(category != null && category.length > 0){
-        queryBuilder.append(" AND pc.categoryName IN :category");
+
+        // Add category filter
+        if (category != null && category.length > 0) {
+            queryBuilder.append(" AND pc.categoryName IN :category");
         }
+
         // Add price filter
-        queryBuilder.append(" AND (CASE WHEN p.salePrice > 0 THEN (p.originalPrice - (p.originalPrice * p.salePrice / 100)) * (1 + p.vat / 100) ELSE p.originalPrice * (1 + p.vat / 100) END) BETWEEN :minPrice AND :maxPrice");
+        if (minPrice >= 0 && maxPrice >= 0) {
+            queryBuilder.append(" AND (CASE WHEN p.salePrice > 0 THEN (p.originalPrice - (p.originalPrice * p.salePrice / 100)) * (1 + p.vat / 100) ELSE p.originalPrice * (1 + p.vat / 100) END) BETWEEN :minPrice AND :maxPrice");
+        }
 
         Query query = entityManager.createQuery(queryBuilder.toString(), Product.class);
 
@@ -74,30 +81,44 @@ public class ListingProductServiceImpl implements ListingProductService {
         if (genders != null && genders.length > 0) {
             query.setParameter("genders", Arrays.asList(genders));
         }
-        query.setParameter("minPrice", minPrice);
-        query.setParameter("maxPrice", maxPrice);
+        if (minPrice >= 0 && maxPrice >= 0) {
+            query.setParameter("minPrice", minPrice);
+            query.setParameter("maxPrice", maxPrice);
+        }
+
+        // Debugging output
+        System.out.println("Generated Query: " + queryBuilder.toString());
+        System.out.println("Parameters: ");
+        System.out.println("Colors: " + Arrays.toString(colors));
+        System.out.println("Sizes: " + Arrays.toString(sizes));
+        System.out.println("Brands: " + Arrays.toString(brands));
+        System.out.println("Categories: " + Arrays.toString(category));
+        System.out.println("Genders: " + Arrays.toString(genders));
+        System.out.println("Min Price: " + minPrice);
+        System.out.println("Max Price: " + maxPrice);
 
         List<ListingProductDto> result = new ArrayList<>();
         List<Product> products = query.getResultList();
 
         for (Product product : products) {
             for (Quantity quantity : product.getQuantities()) {
-                // Gọi lại mapper để ánh xạ Product và Quantity sang ListingProductDto
-                ListingProductDto listingProductDto = ListingProductMapper.mapToListingProductDto(
-                    product, 
-                    quantity, 
-                    product.getBrand(),
-                    product.getProductCategory(), 
-                    quantity.getSize(), 
-                    quantity.getColor()
-                );
-                result.add(listingProductDto);
+                // Only add the product if its size matches the requested size
+                if (sizes != null && sizes.length > 0 && Arrays.asList(sizes).contains(quantity.getSize().getSizeName())) {
+                    ListingProductDto listingProductDto = ListingProductMapper.mapToListingProductDto(
+                        product,
+                        quantity,
+                        product.getBrand(),
+                        product.getProductCategory(),
+                        quantity.getSize(),
+                        quantity.getColor()
+                    );
+                    result.add(listingProductDto);
+                }
             }
         }
 
         // Sort the result list based on final price after mapping
         result.sort((p1, p2) -> Double.compare(p1.getFinalPrice(), p2.getFinalPrice()));
-
         return result;
     }
 
