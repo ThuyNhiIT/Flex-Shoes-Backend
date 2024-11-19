@@ -56,7 +56,7 @@ public class InvoiceController {
     @PostMapping
     public ResponseEntity<Map<String, Object>> createInvoice(@RequestBody InvoiceDto invoiceDto) {
         InvoiceDto createdInvoice = invoiceService.createInvoiceFormOrder(invoiceDto);
-        System.out.println("Generated Invoice ID: " + createdInvoice.getInvoiceId()); // Kiểm tra giá trị ID
+        System.out.println("Generated Invoice ID: " + createdInvoice.getInvoiceId());
         Map<String, Object> response = new HashMap<>();
         response.put("id", createdInvoice.getInvoiceId());
         return ResponseEntity.ok(response);
