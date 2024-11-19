@@ -21,7 +21,9 @@ public class ListingProductMapper {
         listingProductDto.setCategoryName(productCategory.getCategoryName());
         listingProductDto.setGender(product.getGender().toString());
         listingProductDto.setImages(product.getImages());
-        double finalPrice = product.getSalePrice() * (1 + product.getVat() / 100);
+//        double finalPrice = product.getSalePrice() * (1 + product.getVat() / 100);
+        double finalPrice = (product.getOriginalPrice() - (product.getOriginalPrice() * product.getSalePrice() / 100)) * (1 + product.getVat() / 100);
+        finalPrice = Math.round(finalPrice * 100.0) / 100.0; // Làm tròn đến 2 chữ số thập phân
         listingProductDto.setFinalPrice(finalPrice);
         return listingProductDto;
 

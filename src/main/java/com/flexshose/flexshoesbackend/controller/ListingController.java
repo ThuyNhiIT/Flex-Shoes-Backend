@@ -29,12 +29,12 @@ public class ListingController {
             @RequestParam(required = false) double maxPrice)
 
     {
-        System.out.println("Colors: " + (colors != null ? String.join(", ", colors) : "null"));
-        System.out.println("Sizes: " + (sizes != null ? String.join(", ", sizes) : "null"));
-        System.out.println("Brands: " + (brands != null ? String.join(", ", brands) : "null"));
-        System.out.println("Genders: " + (genders != null ? String.join(", ", genders) : "null"));
-        System.out.println("Min Price: " + minPrice);
-        System.out.println("Max Price: " + maxPrice);
+//        System.out.println("Colors: " + (colors != null ? String.join(", ", colors) : "null"));
+//        System.out.println("Sizes: " + (sizes != null ? String.join(", ", sizes) : "null"));
+//        System.out.println("Brands: " + (brands != null ? String.join(", ", brands) : "null"));
+//        System.out.println("Genders: " + (genders != null ? String.join(", ", genders) : "null"));
+//        System.out.println("Min Price: " + minPrice);
+//        System.out.println("Max Price: " + maxPrice);
 
 
 
