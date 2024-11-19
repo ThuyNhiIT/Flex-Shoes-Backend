@@ -9,7 +9,4 @@ public interface ProductService  {
     // getAllProducts
     List<ProductDto> getAllProducts();
 
-
-
-
 }

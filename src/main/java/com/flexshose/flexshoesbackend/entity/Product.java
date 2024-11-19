@@ -57,4 +57,9 @@ public class Product implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BRAND_ID")
     private Brand brand;
+
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private Set<Quantity> quantities;
+
 }
