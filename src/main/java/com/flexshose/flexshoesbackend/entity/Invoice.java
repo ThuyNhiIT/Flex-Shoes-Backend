@@ -24,6 +24,7 @@ public class Invoice implements Serializable {
     private Integer invoiceId;
 
     @Column(name = "ISSUE_DATE")
+    @Temporal(TemporalType.DATE)
     private LocalDate issueDate;
 
     @Column(name = "RECEIVER_NUMBER", columnDefinition = "nvarchar(12)")
