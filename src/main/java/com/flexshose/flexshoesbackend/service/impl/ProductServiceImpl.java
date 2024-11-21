@@ -41,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
                         product.getProductId(),
                         product.getProductName(),
                         product.getOriginalPrice(),
+                        product.getImages(),
                         product.getDescription()))
                 .collect(Collectors.toList());
 	}
