@@ -31,4 +31,18 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
+    
+    // searchProductsByName
+	@Override
+	public List<ProductDto> searchProductsByName(String name) {
+		return productRepository.findByNameContainingIgnoreCase(name)
+                .stream()
+                .map(product -> new ProductDto(
+                        product.getProductId(),
+                        product.getProductName(),
+                        product.getOriginalPrice(),
+                        product.getDescription()))
+                .collect(Collectors.toList());
+	}
+
 }
