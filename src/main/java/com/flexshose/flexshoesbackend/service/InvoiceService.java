@@ -9,4 +9,5 @@ public interface InvoiceService {
     InvoiceDto createInvoiceFormOrder(InvoiceDto invoiceDto);
     List<InvoiceDto> getAllInvoice();
     Invoice saveInvoice(Invoice invoice);
+    Boolean updateOrderStatus(Integer invoiceId, String newStatus);
 }
