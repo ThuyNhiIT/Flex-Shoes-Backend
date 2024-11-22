@@ -22,7 +22,7 @@ public class ListInvoiceController {
         this.listInvoiceService = listInvoiceService;
     }
 
-    @GetMapping("/{customerId}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getInvoicesByCustomer(@PathVariable Integer customerId) {
         List<Invoice> invoices = listInvoiceService.getInvoicesByCustomerId(customerId);
 
