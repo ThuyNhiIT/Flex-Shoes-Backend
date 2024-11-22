@@ -46,15 +46,15 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceRepository.save(invoice);
     }
 
-	@Override
-	public List<InvoiceDto> getRecentInvoices() {
-		// Lấy 10 hóa đơn gần nhất, sắp xếp theo ngày phát hành giảm dần
-        return invoiceRepository.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "issueDate")))
-                .getContent()
+    @Override
+    public List<InvoiceDto> getRecentInvoices() {
+        // Lấy tất cả hóa đơn, sắp xếp theo ngày phát hành giảm dần
+        return invoiceRepository.findAll(Sort.by(Sort.Direction.DESC, "issueDate"))
                 .stream()
                 .map(InvoiceMapper::mapToInvoiceDto)
                 .toList();
-	}
+    }
+
 
 	// Lấy tổng số đơn đặt hàng
     @Override
