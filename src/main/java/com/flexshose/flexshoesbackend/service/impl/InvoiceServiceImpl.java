@@ -55,4 +55,22 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .map(InvoiceMapper::mapToInvoiceDto)
                 .toList();
 	}
+
+	// Lấy tổng số đơn đặt hàng
+    @Override
+    public long getTotalOrderCount() {
+        return invoiceRepository.count(); // Trả về tổng số đơn hàng
+    }
+
+    // Lấy tổng số đơn đang vận chuyển
+    @Override
+    public long getTotalShippingOrders() {
+        return invoiceRepository.countByOrderStatus("Processing"); // Tổng số đơn hàng có trạng thái "Processing"
+    }
+
+    // Lấy tổng tiền của tất cả các hóa đơn
+    @Override
+    public double getTotalAmount() {
+        return invoiceRepository.sumTotalAmount(); // Trả về tổng số tiền từ tất cả các hóa đơn
+    }
 }

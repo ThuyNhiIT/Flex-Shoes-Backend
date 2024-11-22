@@ -12,4 +12,8 @@ public interface InvoiceService {
     
     // API để lấy ra các hóa đơn gần đây (GET /api/invoices/recent)
     List<InvoiceDto> getRecentInvoices();
+    
+    long getTotalOrderCount();
+    long getTotalShippingOrders();
+    double getTotalAmount();
 }
