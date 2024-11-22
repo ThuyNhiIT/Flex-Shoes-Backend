@@ -10,26 +10,19 @@ import java.util.stream.Collectors;
 
 public class ListInvoiceMapper {
 
-
     public static List<ListInvoiceDto> toListInvoiceDto(List<Invoice> invoices) {
-        return invoices.stream().map(invoice -> {
+        return invoices.stream().flatMap(invoice -> invoice.getInvoiceDetails().stream().map(invoiceDetail -> {
             ListInvoiceDto dto = new ListInvoiceDto();
-            dto.setIssueDate(invoice.getIssueDate());
+            dto.setIssueDate(invoice.getIssueDate());  // Lấy ngày hóa đơn từ Invoice
 
-            if (invoice.getInvoiceDetails() != null && !invoice.getInvoiceDetails().isEmpty()) {
-                InvoiceDetail invoiceDetail = invoice.getInvoiceDetails().iterator().next();
-                if (invoiceDetail != null && invoiceDetail.getProduct() != null) {
-                    Product product = invoiceDetail.getProduct();
-                    dto.setProductName(product.getProductName());
-                    dto.setImage(product.getImages() != null ?
-                            product.getImages().stream().findFirst().orElse("No Image") :
-                            "No Image");
-                }
-            }
+            // Lấy thông tin sản phẩm từ InvoiceDetail
+            Product product = invoiceDetail.getProduct();
+            dto.setProductName(product.getProductName());  // Tên sản phẩm
+            dto.setImage(product.getImages().stream().findFirst().orElse(null));  // Lấy hình ảnh đầu tiên của sản phẩm
+            dto.setQuantity(invoiceDetail.getQuantity());  // Số lượng sản phẩm
 
-            dto.setTotal(invoice.getTotal());
+            dto.setTotal(invoice.getTotal());  // Tổng tiền của hóa đơn
             return dto;
-        }).collect(Collectors.toList());
+        })).collect(Collectors.toList());
     }
-
 }

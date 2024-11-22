@@ -1,6 +1,8 @@
 package com.flexshose.flexshoesbackend.controller;
 
+import com.flexshose.flexshoesbackend.dto.ListInvoiceDto;
 import com.flexshose.flexshoesbackend.entity.Invoice;
+import com.flexshose.flexshoesbackend.mapper.ListInvoiceMapper;
 import com.flexshose.flexshoesbackend.service.ListInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,9 @@ public class ListInvoiceController {
             ));
         }
 
-        return ResponseEntity.ok(invoices);
+        // Sử dụng ListInvoiceMapper để chuyển đổi Invoice thành ListInvoiceDto
+        List<ListInvoiceDto> invoiceDtos = ListInvoiceMapper.toListInvoiceDto(invoices);
+
+        return ResponseEntity.ok(invoiceDtos);
     }
 }

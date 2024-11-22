@@ -19,13 +19,6 @@ public class ListInvoiceImpl implements ListInvoiceService {
         this.listInvoiceRepository = listInvoiceRepository;
     }
 
-    /**
-     * Get invoices by customer ID.
-     *
-     * @param customerId The ID of the customer.
-     * @return List of invoices, or an empty list if none are found.
-     * @throws IllegalArgumentException if customerId is null.
-     */
     @Override
     public List<Invoice> getInvoicesByCustomerId(Integer customerId) {
         if (customerId == null) {
@@ -33,8 +26,6 @@ public class ListInvoiceImpl implements ListInvoiceService {
         }
 
         List<Invoice> invoices = listInvoiceRepository.findByCustomerCustomerId(customerId);
-
-        // Return an empty list if no invoices are found
         return invoices != null ? invoices : Collections.emptyList();
     }
 }
