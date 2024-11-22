@@ -6,6 +6,9 @@ import com.flexshose.flexshoesbackend.mapper.InvoiceMapper;
 import com.flexshose.flexshoesbackend.repository.InvoiceRepository;
 import com.flexshose.flexshoesbackend.service.InvoiceService;
 import lombok.AllArgsConstructor;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class InvoiceServiceImpl implements InvoiceService {
     private final InvoiceRepository invoiceRepository;
+    
+    
     @Override
     public InvoiceDto createInvoiceFormOrder(InvoiceDto invoiceDto) {
         //Chuyen doi InvoiceDto sang  entity Invoice
@@ -40,4 +45,14 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Invoice saveInvoice(Invoice invoice) {
         return invoiceRepository.save(invoice);
     }
+
+	@Override
+	public List<InvoiceDto> getRecentInvoices() {
+		// Lấy 10 hóa đơn gần nhất, sắp xếp theo ngày phát hành giảm dần
+        return invoiceRepository.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "issueDate")))
+                .getContent()
+                .stream()
+                .map(InvoiceMapper::mapToInvoiceDto)
+                .toList();
+	}
 }

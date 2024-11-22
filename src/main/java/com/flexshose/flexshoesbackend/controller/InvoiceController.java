@@ -62,4 +62,10 @@ public class InvoiceController {
         return ResponseEntity.ok(response);
 
     }
+    
+    @GetMapping("/recent")
+    public ResponseEntity<List<InvoiceDto>> getRecentInvoices() {
+        List<InvoiceDto> recentInvoices = invoiceService.getRecentInvoices();
+        return ResponseEntity.ok(recentInvoices);
+    }
 }
