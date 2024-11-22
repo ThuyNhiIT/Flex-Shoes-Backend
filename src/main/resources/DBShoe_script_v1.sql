@@ -57,7 +57,7 @@ INSERT INTO Size (size_name) VALUES
 select * from size
 
 INSERT INTO Product (product_name, [description], original_price, [status], sale_price, vat, category_id, brand_id, [gender]) VALUES
-                                                                                                                                  ('Nike Air Max', 'Comfortable and stylish sneakers', 120.00, 'Available', 5.00, 10.0, 'CT004', 'BR001', 'MEN'),
+                                                                                                                                          ('Nike Air Max', 'Comfortable and stylish sneakers', 120.00, 'Available', 5.00, 10.0, 'CT004', 'BR001', 'MEN'),
                                                                                                                                   ('Nike Air Force 1 Shadow', 'Comfortable and stylish sneakers', 120.00, 'Available', 10.00, 10.0, 'CT004', 'BR001', 'MEN'),
                                                                                                                                   ('Adidas Ultraboost', 'High-performance running shoes', 150.00, 'Available', 15.00, 10.0, 'CT004', 'BR002', 'MEN'),
                                                                                                                                   ('Puma RS-X', 'Retro-style chunky sneakers', 110.00, 'Available', 20.00, 10.0, 'CT005', 'BR003', 'MEN'),
