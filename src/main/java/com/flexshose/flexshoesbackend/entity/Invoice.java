@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -52,7 +54,15 @@ public class Invoice implements Serializable {
     private double total;
 
     // Mapping to Customer
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER) // Chuyển sang EAGER loading
     @JoinColumn(name = "CUSTOMER_ID", nullable = true)
     private Customer customer;
+
+
+    // One-to-many relationship with InvoiceDetail (a single invoice can have multiple invoice details)
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<InvoiceDetail> invoiceDetails;
+
+
+
 }
