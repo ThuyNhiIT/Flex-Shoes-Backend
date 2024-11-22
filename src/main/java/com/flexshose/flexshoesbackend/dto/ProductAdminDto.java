@@ -18,5 +18,6 @@ public class ProductAdminDto {
     private String brandName;
     private String categoryName;
     private int quantity;
+    private String description;
     private Set<String> images;
 }

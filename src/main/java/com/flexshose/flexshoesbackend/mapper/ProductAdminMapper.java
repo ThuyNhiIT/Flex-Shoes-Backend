@@ -15,6 +15,7 @@ public class ProductAdminMapper {
         productAdminDto.setProductName(product.getProductName());
         productAdminDto.setOriginalPrice(product.getOriginalPrice());
         productAdminDto.setSalePrice(product.getSalePrice());
+        productAdminDto.setDescription(product.getDescription());
 
         // Nếu quantity là null, set mặc định là 0
         productAdminDto.setQuantity(quantity != null ? quantity.getQuantity() : 0);
