@@ -8,8 +8,8 @@ public interface ProductService  {
     ProductDto createProductDto(ProductDto productDto);
     // getAllProducts
     List<ProductDto> getAllProducts();
-
-
-
+    
+    // searchProductsByName
+    public List<ProductDto> searchProductsByName(String name);
 
 }

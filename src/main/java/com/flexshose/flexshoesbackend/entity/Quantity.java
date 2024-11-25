@@ -13,9 +13,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "QUANTITY")
 public class Quantity implements Serializable {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -23,6 +21,7 @@ public class Quantity implements Serializable {
     @Column(name = "ID", columnDefinition = "int", updatable = false, insertable = false)
     private Integer id;
 
+    // Mapping the relationship with Product (using productId)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
@@ -37,9 +36,4 @@ public class Quantity implements Serializable {
 
     @Column(name = "QUANTITY")
     private int quantity;
-
-    
-//    Khong dung den field nay
-//    @Column(name = "GENDER")
-//    private Gender gender;
 }

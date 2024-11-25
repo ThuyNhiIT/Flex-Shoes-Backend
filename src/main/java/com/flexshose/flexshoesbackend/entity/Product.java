@@ -15,13 +15,12 @@ import java.util.Set;
 @Table(name = "PRODUCT")
 public class Product implements Serializable {
 
-    // Fields
     private static final long serialVersionUID = 8124213137126012314L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID", columnDefinition = "int", updatable = false, insertable = false)
-    private Integer productId;
+    private Integer productId;  // Using productId as the identifier
 
     @Column(name = "PRODUCT_NAME", columnDefinition = "nvarchar(55)")
     private String productName;
@@ -45,11 +44,12 @@ public class Product implements Serializable {
     @CollectionTable(name = "IMAGES", joinColumns = @JoinColumn(name = "PRODUCT_ID"))
     @Column(name = "IMAGE")
     private Set<String> images;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "GENDER", columnDefinition = "nvarchar(10)")
     private Gender gender;
-    // Mapping
+
+    // Mapping relationships
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID")
     private ProductCategory productCategory;
@@ -57,4 +57,7 @@ public class Product implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BRAND_ID")
     private Brand brand;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Quantity> quantities;
 }

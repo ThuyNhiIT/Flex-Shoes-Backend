@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 @AllArgsConstructor
@@ -31,5 +30,20 @@ public class ProductServiceImpl implements ProductService {
                 .map(ProductMapper::mapToProductDto)
                 .collect(Collectors.toList());
     }
+
+    
+    // searchProductsByName
+	@Override
+	public List<ProductDto> searchProductsByName(String name) {
+		return productRepository.findByNameContainingIgnoreCase(name)
+                .stream()
+                .map(product -> new ProductDto(
+                        product.getProductId(),
+                        product.getProductName(),
+                        product.getOriginalPrice(),
+                        product.getImages(),
+                        product.getDescription()))
+                .collect(Collectors.toList());
+	}
 
 }

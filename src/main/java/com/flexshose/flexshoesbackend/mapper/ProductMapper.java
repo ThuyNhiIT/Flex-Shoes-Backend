@@ -10,6 +10,7 @@ public class ProductMapper {
 //        productDto.setProductId(product.getProductId());
         productDto.setProductName(product.getProductName());
         productDto.setDescription(product.getDescription());
+        productDto.setImages(product.getImages());
 //        productDto.setPrice(product.getPrice());
 //        productDto.setCategoryId(product.getProductCategory().getCategoryId());
 //        productDto.setBrandId(product.getBrand().getBrandId());
