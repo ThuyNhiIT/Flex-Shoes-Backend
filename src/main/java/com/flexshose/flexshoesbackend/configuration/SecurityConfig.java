@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-	private final String[] PUBLIC_ENDPOINT = { "api/public/**", "api/account/register", "api/auth/**" };
+	private final String[] PUBLIC_ENDPOINT = { "api/public/**", "api/account/register", "api/auth/**", "/api/customer/add" };
 
 
 	@Bean

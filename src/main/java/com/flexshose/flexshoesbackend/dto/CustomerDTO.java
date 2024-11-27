@@ -25,6 +25,8 @@ public class CustomerDTO {
 
 	String email;
 
+	String gender;
+	
 	LocalDate registerDate;
 
 	Set<String> address;

@@ -45,6 +45,9 @@ public class Customer implements Serializable {
 
     @Column(name = "REGISTER_DATE")
     private LocalDate registerDate;
+    
+    @Column(name = "GENDER")
+    private String gender;
 
     @ElementCollection
     @CollectionTable(name = "ADDRESS", joinColumns =  @JoinColumn(name = "CUSTOMER_ID"))

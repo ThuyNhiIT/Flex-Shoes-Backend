@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.flexshose.flexshoesbackend.dto.CustomerDTO;
+import com.flexshose.flexshoesbackend.dto.response.MyAPIResponse;
 import com.flexshose.flexshoesbackend.service.CustomerService;
 
 import lombok.AccessLevel;
@@ -28,9 +29,10 @@ public class CustomerController {
 	
 	
 	@PostMapping("/add")
-	public CustomerDTO register(@RequestBody CustomerDTO accountDTO) {
-		
-		return customerService.save(accountDTO);
+	public MyAPIResponse<CustomerDTO>  register(@RequestBody CustomerDTO customerDTO) {
+		  MyAPIResponse<CustomerDTO> result = new MyAPIResponse<CustomerDTO>();
+	        result.setResult(customerService.save(customerDTO));
+		return result;
 		
 	}
 	@GetMapping("/findByID/{id}")
