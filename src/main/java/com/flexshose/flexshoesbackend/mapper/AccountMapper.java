@@ -7,10 +7,10 @@ import org.mapstruct.factory.Mappers;
 import com.flexshose.flexshoesbackend.dto.AccountDTO;
 import com.flexshose.flexshoesbackend.entity.Account;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface AccountMapper {
 
-	AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
+	//AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
 
 @Mapping(target = "customerId", source = "customer.customerId")
 	AccountDTO maptoAccountDTO(Account account);

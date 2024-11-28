@@ -1,5 +1,7 @@
 package com.flexshose.flexshoesbackend.dto.response;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AccessLevel;
@@ -19,7 +21,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level =  AccessLevel.PRIVATE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MyAPIResponse <T> {
+public class MyAPIResponse <T> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Builder.Default
 	int code = 1000; 
 	@Builder.Default

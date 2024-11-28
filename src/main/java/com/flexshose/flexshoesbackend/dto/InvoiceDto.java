@@ -21,6 +21,6 @@ public class InvoiceDto {
     private double total;
 
     //Customer
-    private CustomerDto customerDto;
+//    private CustomerDTO customerDto;
 
 }

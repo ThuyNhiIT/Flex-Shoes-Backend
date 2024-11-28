@@ -2,13 +2,13 @@ package com.flexshose.flexshoesbackend.service;
 
 
 
-import com.flexshose.flexshoesbackend.dto.CustomerDto;
-import com.flexshose.flexshoesbackend.dto.CustomersDTO;
+import com.flexshose.flexshoesbackend.dto.CustomerDTO;
+
 
 import java.util.List;
 
 public interface CustomerService {
-    List<CustomersDTO> getAllCustomer();
-    CustomersDTO findByID(Integer id);
-    CustomersDTO save(CustomersDTO customerDTO);
+    List<CustomerDTO> getAllCustomer();
+    CustomerDTO findByID(Integer id);
+    CustomerDTO save(CustomerDTO customerDTO);
 }

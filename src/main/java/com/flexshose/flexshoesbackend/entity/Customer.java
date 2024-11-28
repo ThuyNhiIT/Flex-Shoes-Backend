@@ -19,14 +19,9 @@ import java.util.Set;
 
 public class Customer implements Serializable {
     /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
-
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID", columnDefinition = "int", updatable = false, insertable = false)
@@ -45,6 +40,9 @@ public class Customer implements Serializable {
 
     @Column(name = "REGISTER_DATE")
     private LocalDate registerDate;
+    
+    @Column(name = "GENDER")
+    private String gender;
 
     @ElementCollection
     @CollectionTable(name = "ADDRESS", joinColumns =  @JoinColumn(name = "CUSTOMER_ID"))

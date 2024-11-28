@@ -1,4 +1,6 @@
-package com.flexshose.flexshoesbackend.dto.response;
+package com.flexshose.flexshoesbackend.entity;
+
+import java.io.Serializable;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -9,12 +11,14 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthenticationResponse {
-    boolean authenticated;
-    String token;
-    String role;
-    
+public class CompositeKey implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	Invoice invoice;
+	Product product;
 }
