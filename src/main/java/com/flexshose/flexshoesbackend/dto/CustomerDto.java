@@ -10,7 +10,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CustomerDto {
+public class CustomerDTO {
     private Integer customerId;
     private String customerName;
     private String phoneNumber;
