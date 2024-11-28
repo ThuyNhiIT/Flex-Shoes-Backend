@@ -19,5 +19,4 @@ public interface InvoiceService {
     double getTotalAmount();
     InvoiceDto getInvoice(Integer id);
     List<InvoiceDetail> getInvoiceDetail(Integer invoiceId);
-    List<InvoiceDto> updateInvoice(String keyword);
 }
