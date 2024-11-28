@@ -1,5 +1,6 @@
 package com.flexshose.flexshoesbackend.controller;
 
+import com.flexshose.flexshoesbackend.service.impl.InvoiceServiceImpl;
 import com.flexshose.flexshoesbackend.service.vnpay.Config;
 import com.flexshose.flexshoesbackend.dto.InvoiceDto;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +16,11 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/payment")
 public class PaymentController {
+    private final InvoiceServiceImpl invoiceService;
+
+    public PaymentController(InvoiceServiceImpl invoiceService) {
+        this.invoiceService = invoiceService;
+    }
 
     @PostMapping("/create_payment")
     public ResponseEntity<?> createPayment(
@@ -97,14 +103,35 @@ public class PaymentController {
             @RequestParam(value = "vnp_ResponseCode") String responseCode) {
 
         Map<String, String> response = new HashMap<>();
+
+
+//        if (responseCode.equals("00")) {
+//            response.put("status", "ok");
+//            response.put("message", "Successfully");
+//            response.put("invoiceId", invoiceId);
+//            response.put("data", order);
+//        } else {
+//            response.put("status", "fail");
+//            response.put("message", "Failed");
+//            response.put("data", responseCode);
+//        }
+
         if (responseCode.equals("00")) {
-            response.put("status", "ok");
-            response.put("message", "Successfully");
-            response.put("invoiceId", invoiceId);
-            response.put("data", order);
+            // Cập nhật trạng thái đơn hàng sau khi thanh toán thành công
+            boolean updateStatus = invoiceService.updateOrderStatus(Integer.parseInt(invoiceId), "Paid");
+            if (updateStatus) {
+                response.put("status", "ok");
+                response.put("message", "Payment Successful");
+                response.put("invoiceId", invoiceId);
+                response.put("data", order);
+            } else {
+                response.put("status", "fail");
+                response.put("message", "Failed to update order status");
+                response.put("data", responseCode);
+            }
         } else {
             response.put("status", "fail");
-            response.put("message", "Failed");
+            response.put("message", "Payment Failed");
             response.put("data", responseCode);
         }
         return ResponseEntity.ok(response);

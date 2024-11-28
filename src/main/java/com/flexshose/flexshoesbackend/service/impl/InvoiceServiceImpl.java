@@ -1,30 +1,27 @@
 package com.flexshose.flexshoesbackend.service.impl;
 
 import com.flexshose.flexshoesbackend.dto.InvoiceDto;
+import com.flexshose.flexshoesbackend.entity.Customer;
 import com.flexshose.flexshoesbackend.entity.Invoice;
 import com.flexshose.flexshoesbackend.mapper.InvoiceMapper;
 import com.flexshose.flexshoesbackend.repository.InvoiceRepository;
 import com.flexshose.flexshoesbackend.service.InvoiceService;
 import lombok.AllArgsConstructor;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class InvoiceServiceImpl implements InvoiceService {
     private final InvoiceRepository invoiceRepository;
-    
-    
     @Override
     public InvoiceDto createInvoiceFormOrder(InvoiceDto invoiceDto) {
         //Chuyen doi InvoiceDto sang  entity Invoice
         Invoice invoice = InvoiceMapper.mapToInvoice(invoiceDto);
-        invoice.setOrderStatus("Processing"); // Đặt trạng thái mặc định là Processing
+        invoice.setOrderStatus("Processing");
         //Luu Invoice vao database
         Invoice savedInvoice = invoiceRepository.save(invoice);
         // Kiểm tra kết quả của savedInvoice trước khi ánh xạ lại
@@ -47,30 +44,22 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<InvoiceDto> getRecentInvoices() {
-        // Lấy tất cả hóa đơn, sắp xếp theo ngày phát hành giảm dần
-        return invoiceRepository.findAll(Sort.by(Sort.Direction.DESC, "issueDate"))
-                .stream()
-                .map(InvoiceMapper::mapToInvoiceDto)
-                .toList();
-    }
-
-
-	// Lấy tổng số đơn đặt hàng
-    @Override
-    public long getTotalOrderCount() {
-        return invoiceRepository.count(); // Trả về tổng số đơn hàng
-    }
-
-    // Lấy tổng số đơn đang vận chuyển
-    @Override
-    public long getTotalShippingOrders() {
-        return invoiceRepository.countByOrderStatus("Processing"); // Tổng số đơn hàng có trạng thái "Processing"
-    }
-
-    // Lấy tổng tiền của tất cả các hóa đơn
-    @Override
-    public double getTotalAmount() {
-        return invoiceRepository.sumTotalAmount(); // Trả về tổng số tiền từ tất cả các hóa đơn
+    public Boolean updateOrderStatus(Integer invoiceId, String newStatus) {
+        try {
+            Optional<Invoice> optionalInvoice = invoiceRepository.findById(invoiceId);
+            if (optionalInvoice.isPresent()) {
+                Invoice invoice = optionalInvoice.get();
+                invoice.setOrderStatus(newStatus);//Cap nhat trang thai don hang
+                invoiceRepository.save(invoice);//Luu lai vao database
+                System.out.println("Order ID " + invoiceId + " updated to status: " + newStatus);
+                return true;
+            }else{
+                System.out.println("Invoice ID " + invoiceId + " not found.");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

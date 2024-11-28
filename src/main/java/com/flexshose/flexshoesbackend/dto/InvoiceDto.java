@@ -19,4 +19,8 @@ public class InvoiceDto {
     private String deliveryMethod;
     private String orderStatus;//trang thai don hang
     private double total;
+
+    //Customer
+    private CustomerDto customerDto;
+
 }
