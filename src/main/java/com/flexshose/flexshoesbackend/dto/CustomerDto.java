@@ -1,20 +1,32 @@
 package com.flexshose.flexshoesbackend.dto;
 
-import lombok.*;
-
 import java.time.LocalDate;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@Builder
 @AllArgsConstructor
-@ToString
-public class CustomerDto {
-    private Integer customerId;
-    private String customerName;
-    private String phoneNumber;
-    private String email;
-    private LocalDate registerDate;
-    private Set<String> address;
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class CustomerDTO {
+
+	Integer customerId;
+
+	String customerName;
+
+	String phoneNumber;
+
+	String email;
+
+	LocalDate registerDate;
+
+	Set<String> address;
+
 }
