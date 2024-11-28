@@ -1,14 +1,16 @@
 package com.flexshose.flexshoesbackend.dto;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class InvoiceDetailDto {
-    private Integer invoiceId;
-    private Integer productId;
-    private int quantity;
+	Integer invoiceId;
+	Integer productId;
+	String productName;
+	double salePrice;
+	int quantity;
 }

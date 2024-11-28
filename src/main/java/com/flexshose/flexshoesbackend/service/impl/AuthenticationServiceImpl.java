@@ -64,20 +64,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public AuthenticationResponse authenticate(AuthenticationRequest request) throws MyAppException {
-
 		try {
-
 			Account account = accountRepository.findByUsername(request.getUsername())
 					.orElseThrow(() -> new MyAppException(ErrorCode.USER_NOT_EXISTED));
-			String nameAccess = account.getUsername();
-
+			Role role = account.getRole();
 			boolean authenticated = passwordEncoder.matches(request.getPassword(), account.getPassword());
 			if (!authenticated)
 				throw new MyAppException(ErrorCode.INVALID_PASSWORD);
 
 			String token = generateToken(account);
-			return AuthenticationResponse.builder().authenticated(true).token(token).nameAccess(nameAccess).build();
-
+			return AuthenticationResponse.builder().authenticated(true).token(token).role(role.toString()).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MyAppException(ErrorCode.ACTION_FAILD);

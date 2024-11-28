@@ -1,11 +1,20 @@
 package com.flexshose.flexshoesbackend.service.impl;
 
+import com.flexshose.flexshoesbackend.dto.InvoiceDetailDto;
 import com.flexshose.flexshoesbackend.dto.InvoiceDto;
+import com.flexshose.flexshoesbackend.entity.CompositeKey;
 import com.flexshose.flexshoesbackend.entity.Invoice;
+import com.flexshose.flexshoesbackend.entity.InvoiceDetail;
+import com.flexshose.flexshoesbackend.mapper.InvoiceDetailMapper;
 import com.flexshose.flexshoesbackend.mapper.InvoiceMapper;
+import com.flexshose.flexshoesbackend.repository.InvoiceDetailRepository;
 import com.flexshose.flexshoesbackend.repository.InvoiceRepository;
 import com.flexshose.flexshoesbackend.service.InvoiceService;
+
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,9 +24,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class InvoiceServiceImpl implements InvoiceService {
-    private final InvoiceRepository invoiceRepository;
+    InvoiceRepository invoiceRepository;
+    InvoiceDetailRepository detailRepository;
+    
     
     
     @Override
@@ -73,4 +85,26 @@ public class InvoiceServiceImpl implements InvoiceService {
     public double getTotalAmount() {
         return invoiceRepository.sumTotalAmount(); // Trả về tổng số tiền từ tất cả các hóa đơn
     }
+
+	@Override
+	public InvoiceDto getInvoice(Integer id) {
+		// TODO Auto-generated method stub
+		Invoice invoice = invoiceRepository.findById(id).orElseThrow(
+				() -> new IllegalArgumentException("Invoice with ID " + id + " not found")
+				);
+		return InvoiceMapper.mapToInvoiceDto(invoice);
+	}
+
+	@Override
+	public List<InvoiceDetail> getInvoiceDetail(Integer invoiceId) {	
+			// Lấy ra hóa đơn theo ID
+		Invoice invoice = invoiceRepository.findById(invoiceId).get();
+		return detailRepository.findDetailByInvoiceId(invoice);
+	}
+
+	@Override
+	public List<InvoiceDto> updateInvoice(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

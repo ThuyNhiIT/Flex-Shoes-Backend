@@ -41,9 +41,7 @@ public class AuthenticationController {
     				  response
     				   )
     		   .build();
-       
-      
-       
+  
 	}
 	@PostMapping("/introspect")
 	public MyAPIResponse<IntrospectResponse>  introspect(@RequestBody IntrospectRequest request) throws MyAppException, JOSEException, ParseException{
