@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface CustomerService {
     List<CustomersDTO> getAllCustomer();
+    CustomersDTO findByID(Integer id);
+    CustomersDTO save(CustomersDTO customerDTO);
 }

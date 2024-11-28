@@ -22,4 +22,14 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(item -> customerMapper.mapToCustomerDTO(item))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public CustomersDTO findByID(Integer id) {
+        return customerMapper.mapToCustomerDTO(customerRepository.findById(id).get());
+    }
+
+    @Override
+    public CustomersDTO save(CustomersDTO customerDTO) {
+        return customerMapper.mapToCustomerDTO(customerRepository.save(customerMapper.mapToCustomer(customerDTO)));
+    }
 }
