@@ -15,8 +15,9 @@ public class ProductDetailDto {
         private Integer productId;
         private String productName;
         private String description;
-//        private double originalPrice;
+        private double originalPrice;
         private double salePrice;
+        private double finalPrice;
         private String status;
         private List<String> images;
         private List<ColorDto> colors;

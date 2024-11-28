@@ -13,11 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class ProductDetailServiceImpl implements ProductDetailService {
 
     private final ProductRepository productRepository;
     private static final Logger logger = LoggerFactory.getLogger(ProductDetailServiceImpl.class);
+
+    public ProductDetailServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public ProductDetailDto getProductDetailById(int id) {

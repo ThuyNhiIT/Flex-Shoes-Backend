@@ -21,7 +21,7 @@ public class ProductDetailMapper {
         productDetailDto.setSalePrice(product.getSalePrice());
         productDetailDto.setStatus(product.getStatus());
         productDetailDto.setImages(List.copyOf(product.getImages()));
-
+        productDetailDto.setOriginalPrice(product.getOriginalPrice());
         // Map colors
         List<ColorDto> colors = product.getQuantities().stream()
                 .map(quantity -> new ColorDto(quantity.getColor().getColorId(), quantity.getColor().getColorName()))
@@ -34,7 +34,9 @@ public class ProductDetailMapper {
                 .distinct()
                 .collect(Collectors.toList());
         productDetailDto.setSizes(sizes);
-
+        double finalPrice = (product.getOriginalPrice() - (product.getOriginalPrice() * product.getSalePrice() / 100)) * (1 + product.getVat() / 100);
+        finalPrice = Math.round(finalPrice * 100.0) / 100.0; // Làm tròn đến 2 chữ số thập phân
+        productDetailDto.setFinalPrice(finalPrice);
         return productDetailDto;
     }
 }
