@@ -1,7 +1,9 @@
 package com.flexshose.flexshoesbackend.service.impl;
 
+import com.flexshose.flexshoesbackend.dto.AddProductDto;
 import com.flexshose.flexshoesbackend.dto.ProductDto;
 import com.flexshose.flexshoesbackend.entity.Product;
+import com.flexshose.flexshoesbackend.mapper.AddProductMapper;
 import com.flexshose.flexshoesbackend.mapper.ProductMapper;
 import com.flexshose.flexshoesbackend.repository.ProductRepository;
 import com.flexshose.flexshoesbackend.service.ProductService;
@@ -18,10 +20,11 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;  // Thêm final ở đây
 
     @Override
-    public ProductDto createProductDto(ProductDto productDto) {
-        Product product = ProductMapper.mapToProduct(productDto);
+    public AddProductDto createProductDto(AddProductDto addProductDto) {
+        Product product = AddProductMapper.toProduct(addProductDto);
         Product savedProduct = productRepository.save(product);
-        return ProductMapper.mapToProductDto(savedProduct);
+        System.out.println("savedProduct: " + savedProduct);
+        return AddProductMapper.toAddProductDto(savedProduct);
     }
 
     @Override

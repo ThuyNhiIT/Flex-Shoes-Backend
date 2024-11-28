@@ -1,16 +1,34 @@
 package com.flexshose.flexshoesbackend.dto;
 
+import com.flexshose.flexshoesbackend.entity.Color;
+import com.flexshose.flexshoesbackend.entity.Product;
+import com.flexshose.flexshoesbackend.entity.Size;
+import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class QuantityDto {
-    private Integer id;
-    private Integer productId;
-    private Integer colorId;
-    private Integer sizeId;
+
+    private int id;
+//    @JsonIgnore
+    private Product product;
+    private Color color;
+    private Size size;
     private int quantity;
+
+//
+//    private Integer productId;
+//    private Integer colorId;
+//    private Integer sizeId;
+//    private int quantity;
+
+
+
+
+
 }
