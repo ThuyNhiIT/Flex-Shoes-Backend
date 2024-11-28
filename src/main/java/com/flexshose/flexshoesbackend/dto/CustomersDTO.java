@@ -16,19 +16,12 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomersDTO {
-
     Integer customerId;
-
     String customerName;
-
     String phoneNumber;
-
     String email;
-
     String gender;
-
     LocalDate registerDate;
-
     Set<String> address;
 
 }
