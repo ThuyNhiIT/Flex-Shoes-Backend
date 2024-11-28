@@ -6,11 +6,9 @@ import com.flexshose.flexshoesbackend.dto.response.MyAPIResponse;
 import com.flexshose.flexshoesbackend.entity.InvoiceDetail;
 import com.flexshose.flexshoesbackend.mapper.InvoiceDetailMapper;
 import com.flexshose.flexshoesbackend.service.InvoiceService;
-
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +20,8 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/invoices")
-@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class InvoiceController {
 	InvoiceService invoiceService;
 	InvoiceDetailMapper detailMapper;
@@ -67,6 +65,7 @@ public class InvoiceController {
 		response.put("id", createdInvoice.getInvoiceId());
 		return ResponseEntity.ok(response);
 
+
 	}
 
 	@GetMapping("/recent")
@@ -107,4 +106,34 @@ public class InvoiceController {
 		List<InvoiceDetailDto> listDto = list.stream().map(item -> detailMapper.toInvoiceDetailDTO(item)).toList();
 		return MyAPIResponse.<List<InvoiceDetailDto>>builder().result(listDto).build();
 	}
+
+    
+    
+//    @GetMapping("/recent")
+//    public ResponseEntity<List<InvoiceDto>> getRecentInvoices() {
+//        List<InvoiceDto> recentInvoices = invoiceService.getRecentInvoices();
+//        return ResponseEntity.ok(recentInvoices);
+//    }
+//    
+// // Trả về tổng số đơn đặt hàng
+//    @GetMapping("/total")
+//    public ResponseEntity<Long> getTotalOrderCount() {
+//        long totalOrders = invoiceService.getTotalOrderCount();
+//        return ResponseEntity.ok(totalOrders);
+//    }
+//
+//    // Trả về tổng số đơn đang vận chuyển (Processing)
+//    @GetMapping("/shipping")
+//    public ResponseEntity<Long> getTotalShippingOrders() {
+//        long totalShipping = invoiceService.getTotalShippingOrders();
+//        return ResponseEntity.ok(totalShipping);
+//    }
+//
+//    // Trả về tổng số tiền của tất cả các hóa đơn
+//    @GetMapping("/total-amount")
+//    public ResponseEntity<Double> getTotalAmount() {
+//        double totalAmount = invoiceService.getTotalAmount();
+//        return ResponseEntity.ok(totalAmount);
+//    }
 }
+

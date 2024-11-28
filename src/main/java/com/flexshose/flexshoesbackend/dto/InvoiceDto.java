@@ -20,4 +20,7 @@ public class InvoiceDto {
     private String orderStatus;//trang thai don hang
     private double total;
     private Integer customerId;
+    //Customer
+    private CustomerDto customerDto;
+
 }

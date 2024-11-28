@@ -16,12 +16,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "CUSTOMER")
-
 public class Customer implements Serializable {
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 1L;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUSTOMER_ID", columnDefinition = "int", updatable = false, insertable = false)

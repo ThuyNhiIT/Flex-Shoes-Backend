@@ -9,14 +9,13 @@ import java.util.List;
 public interface InvoiceService {
     InvoiceDto createInvoiceFormOrder(InvoiceDto invoiceDto);
     List<InvoiceDto> getAllInvoice();
-    Invoice saveInvoice(Invoice invoice);
-    
+    Invoice saveInvoice(Invoice invoice); 
     // API để lấy ra các hóa đơn gần đây (GET /api/invoices/recent)
     List<InvoiceDto> getRecentInvoices();
-    
     long getTotalOrderCount();
     long getTotalShippingOrders();
     double getTotalAmount();
     InvoiceDto getInvoice(Integer id);
     List<InvoiceDetail> getInvoiceDetail(Integer invoiceId);
+    Boolean updateOrderStatus(Integer invoiceId, String newStatus);
 }

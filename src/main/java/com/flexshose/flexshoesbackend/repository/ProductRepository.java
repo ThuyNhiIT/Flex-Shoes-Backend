@@ -24,4 +24,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     // Bạn có thể thêm các phương thức tìm kiếm khác nếu cần, ví dụ:
     // Tìm sản phẩm theo tên sản phẩm (chứa từ khóa)
     List<Product> findByProductNameContaining(String productName);
+
+    // get all products
+    List<Product> findAll();
+
 }
