@@ -62,4 +62,31 @@ public class InvoiceController {
         return ResponseEntity.ok(response);
 
     }
+    
+    @GetMapping("/recent")
+    public ResponseEntity<List<InvoiceDto>> getRecentInvoices() {
+        List<InvoiceDto> recentInvoices = invoiceService.getRecentInvoices();
+        return ResponseEntity.ok(recentInvoices);
+    }
+    
+ // Trả về tổng số đơn đặt hàng
+    @GetMapping("/total")
+    public ResponseEntity<Long> getTotalOrderCount() {
+        long totalOrders = invoiceService.getTotalOrderCount();
+        return ResponseEntity.ok(totalOrders);
+    }
+
+    // Trả về tổng số đơn đang vận chuyển (Processing)
+    @GetMapping("/shipping")
+    public ResponseEntity<Long> getTotalShippingOrders() {
+        long totalShipping = invoiceService.getTotalShippingOrders();
+        return ResponseEntity.ok(totalShipping);
+    }
+
+    // Trả về tổng số tiền của tất cả các hóa đơn
+    @GetMapping("/total-amount")
+    public ResponseEntity<Double> getTotalAmount() {
+        double totalAmount = invoiceService.getTotalAmount();
+        return ResponseEntity.ok(totalAmount);
+    }
 }

@@ -31,7 +31,7 @@ public class InvoiceMapper {
         invoiceDto.setReceiverAddress(invoice.getReceiverAddress());
         invoiceDto.setPaymentMethod(invoice.getPaymentMethod());
         invoiceDto.setDeliveryMethod(invoice.getDeliveryMethod());
-        invoiceDto.setOrderStatus("Processing");
+        invoiceDto.setOrderStatus(invoice.getOrderStatus());
         invoiceDto.setTotal(invoice.getTotal());
 
         return invoiceDto;
