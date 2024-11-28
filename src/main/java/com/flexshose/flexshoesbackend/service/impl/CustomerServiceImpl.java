@@ -1,13 +1,12 @@
 package com.flexshose.flexshoesbackend.service.impl;
 
-import com.flexshose.flexshoesbackend.dto.CustomerDto;
+
 import com.flexshose.flexshoesbackend.dto.CustomersDTO;
 import com.flexshose.flexshoesbackend.mapper.CustomerMapper;
 import com.flexshose.flexshoesbackend.repository.CustomerRepository;
 import com.flexshose.flexshoesbackend.service.CustomerService;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 

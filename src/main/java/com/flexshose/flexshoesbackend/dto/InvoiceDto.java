@@ -1,11 +1,13 @@
 package com.flexshose.flexshoesbackend.dto;
 
-import lombok.*;
-
 import java.time.LocalDate;
 
-@Getter
-@Setter
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -20,7 +22,4 @@ public class InvoiceDto {
     private String orderStatus;//trang thai don hang
     private double total;
     private Integer customerId;
-    //Customer
-    private CustomerDto customerDto;
-
 }
