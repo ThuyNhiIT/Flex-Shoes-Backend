@@ -37,4 +37,8 @@ public class Account implements Serializable {
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
 }

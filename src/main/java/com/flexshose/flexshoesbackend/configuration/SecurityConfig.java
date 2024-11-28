@@ -53,7 +53,7 @@ public class SecurityConfig {
 	CustomJWTDecoder customJWTDecoder() {
 		return new CustomJWTDecoder();
 	}
-	
+
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {
