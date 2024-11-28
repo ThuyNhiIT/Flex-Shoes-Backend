@@ -1,6 +1,7 @@
 package com.flexshose.flexshoesbackend.service.impl;
 
 import com.flexshose.flexshoesbackend.dto.CustomerDto;
+import com.flexshose.flexshoesbackend.entity.Customer;
 import com.flexshose.flexshoesbackend.mapper.CustomerMapper;
 import com.flexshose.flexshoesbackend.repository.CustomerRepository;
 import com.flexshose.flexshoesbackend.service.CustomerService;
