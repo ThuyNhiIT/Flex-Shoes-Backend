@@ -19,11 +19,11 @@ import java.util.Set;
 
 public class Customer implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
+    /**
      *
      */
 
