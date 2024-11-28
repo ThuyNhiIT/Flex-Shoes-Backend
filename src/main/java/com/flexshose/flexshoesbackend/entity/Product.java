@@ -60,4 +60,8 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Quantity> quantities;
+
+    public Product(Integer productId){
+        this.productId = productId;
+    }
 }

@@ -2,8 +2,6 @@ package com.flexshose.flexshoesbackend.dto;
 
 import lombok.*;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Getter
@@ -55,5 +53,7 @@ public class ProductDto {
 	}
 
 
-
+    public ProductDto(Integer productId) {
+        this.productId = productId;
+    }
 }
