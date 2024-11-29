@@ -1,26 +1,21 @@
 package com.flexshose.flexshoesbackend.service.impl;
 
-import com.flexshose.flexshoesbackend.dto.InvoiceDetailDto;
 import com.flexshose.flexshoesbackend.dto.InvoiceDto;
-
-import com.flexshose.flexshoesbackend.entity.CompositeKey;
 
 import com.flexshose.flexshoesbackend.entity.Customer;
 
 import com.flexshose.flexshoesbackend.entity.Invoice;
-import com.flexshose.flexshoesbackend.entity.InvoiceDetail;
 import com.flexshose.flexshoesbackend.mapper.InvoiceDetailMapper;
 import com.flexshose.flexshoesbackend.mapper.InvoiceMapper;
+import com.flexshose.flexshoesbackend.repository.CustomerRepository;
 import com.flexshose.flexshoesbackend.repository.InvoiceDetailRepository;
 import com.flexshose.flexshoesbackend.repository.InvoiceRepository;
+import com.flexshose.flexshoesbackend.service.InvoiceDetailService;
 import com.flexshose.flexshoesbackend.service.InvoiceService;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -35,32 +30,31 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     InvoiceRepository invoiceRepository;
     InvoiceDetailRepository detailRepository;
+    InvoiceMapper invoiceMapper;
+    InvoiceDetailMapper invoiceDetailMapper;
+    CustomerRepository customerRepository;
+    InvoiceDetailService invoiceDetailService;
 
 
     @Override
     public InvoiceDto createInvoiceFormOrder(InvoiceDto invoiceDto) {
-        //Chuyen doi InvoiceDto sang  entity Invoice
-        Invoice invoice = InvoiceMapper.mapToInvoice(invoiceDto);
+       
+        Invoice invoice = invoiceMapper.toInvoice(invoiceDto);
         invoice.setOrderStatus("Processing");
-        //Luu Invoice vao database
         Invoice savedInvoice = invoiceRepository.save(invoice);
-        // Kiểm tra kết quả của savedInvoice trước khi ánh xạ lại
-        // System.out.println("Invoice Saved: " + savedInvoice);
-        // Lấy `invoiceId` tự phát sinh
-        System.out.println("Generated Invoice ID: " + savedInvoice.getInvoiceId());
-        //Chuyen doi Invoice vua luu thanh InvoiceDto de tra ve
-        return InvoiceMapper.mapToInvoiceDto(savedInvoice);
+        return invoiceMapper.toInvoiceDTO(savedInvoice);
     }
 
     @Override
     public List<InvoiceDto> getAllInvoice() {
         return invoiceRepository.findAll().stream()
-                .map(InvoiceMapper::mapToInvoiceDto)
+                .map(item -> invoiceMapper.toInvoiceDTO(item))
                 .collect(Collectors.toList());
     }
 
-    public Invoice saveInvoice(Invoice invoice) {
-        return invoiceRepository.save(invoice);
+    public Invoice saveInvoice(InvoiceDto invoiceDto) {
+		Invoice invoice = invoiceMapper.toInvoice(invoiceDto);
+		return invoiceRepository.save(invoice);
     }
 
     @Override
@@ -89,38 +83,51 @@ public class InvoiceServiceImpl implements InvoiceService {
 		Invoice invoice = invoiceRepository.findById(id).orElseThrow(
 				() -> new IllegalArgumentException("Invoice with ID " + id + " not found")
 				);
-		return InvoiceMapper.mapToInvoiceDto(invoice);
-	}
-
-	@Override
-	public List<InvoiceDetail> getInvoiceDetail(Integer invoiceId) {	
-			// Lấy ra hóa đơn theo ID
-		Invoice invoice = invoiceRepository.findById(invoiceId).get();
-		return detailRepository.findDetailByInvoiceId(invoice);
+		return invoiceMapper.toInvoiceDTO(invoice);
 	}
 
 	@Override
 	public List<InvoiceDto> getRecentInvoices() {
-		// TODO Auto-generated method stub
-		return null;
+		 // Lấy tất cả hóa đơn, sắp xếp theo ngày phát hành giảm dần
+        return invoiceRepository.findAll(Sort.by(Sort.Direction.DESC, "issueDate"))
+                .stream()
+                .map(item -> invoiceMapper.toInvoiceDTO(item))
+                .toList();
 	}
 
 	@Override
 	public long getTotalOrderCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return invoiceRepository.count();
 	}
 
 	@Override
 	public long getTotalShippingOrders() {
 		// TODO Auto-generated method stub
-		return 0;
+		 return invoiceRepository.countByOrderStatus("Processing");
 	}
 
 	@Override
 	public double getTotalAmount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return invoiceRepository.sumTotalAmount();
 	}
+
+	@Override
+	public boolean updateInvoice(InvoiceDto invoiceDto) {
+		try {
+			
+			Customer customer = customerRepository.findById(invoiceDto.getCustomerId()).get();
+			Invoice invoice = invoiceMapper.toInvoice(invoiceDto);
+			invoice.setCustomer(customer);
+			invoiceRepository.save(invoice);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 
 }

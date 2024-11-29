@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -61,7 +62,8 @@ public class Invoice implements Serializable {
 
     // One-to-many relationship with InvoiceDetail (a single invoice can have multiple invoice details)
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<InvoiceDetail> invoiceDetails;
+    @Column(name = "INVOICE_DETAILS", nullable = true)
+    private List<InvoiceDetail> invoiceDetails;
 
 
 

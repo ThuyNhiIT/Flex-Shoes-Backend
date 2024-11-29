@@ -21,20 +21,19 @@ import jakarta.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "INVOICE_DETAIL")
-@IdClass(CompositeKey.class)
 public class InvoiceDetail implements Serializable {
-
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
     @Id
+    Integer detailId;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INVOICE_ID")
     private Invoice invoice;
 
-    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
