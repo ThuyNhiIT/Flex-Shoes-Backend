@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.flexshose.flexshoesbackend.entity.Account;
 import com.flexshose.flexshoesbackend.entity.Role;
 import com.flexshose.flexshoesbackend.repository.AccountRepository;
+import com.flexshose.flexshoesbackend.repository.CustomerRepository;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -47,4 +48,6 @@ public class WebConfig implements WebMvcConfigurer {
                 
 		};
 	}
+  
+	
 }

@@ -61,7 +61,7 @@ public class Invoice implements Serializable {
 
 
     // One-to-many relationship with InvoiceDetail (a single invoice can have multiple invoice details)
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Column(name = "INVOICE_DETAILS", nullable = true)
     private List<InvoiceDetail> invoiceDetails;
 

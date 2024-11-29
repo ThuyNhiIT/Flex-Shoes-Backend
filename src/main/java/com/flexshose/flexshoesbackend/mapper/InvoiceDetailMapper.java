@@ -1,25 +1,38 @@
 package com.flexshose.flexshoesbackend.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import com.flexshose.flexshoesbackend.dto.InvoiceDetailDto;
 import com.flexshose.flexshoesbackend.entity.InvoiceDetail;
+import com.flexshose.flexshoesbackend.entity.Product;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ProductMapperv2.class})
 public interface InvoiceDetailMapper {
 	
-	@Mapping(source = "invoiceDetail.invoice.invoiceId", target = "invoiceId")
-	@Mapping(source = "invoiceDetail.product.productId", target = "productId")
-	@Mapping(source = "invoiceDetail.product.productName", target = "productName")
-	@Mapping(source = "invoiceDetail.product.salePrice", target = "salePrice")
-	InvoiceDetailDto toInvoiceDetailDTO(InvoiceDetail invoiceDetail);
-	
-	@Mapping(source = "invoiceDetailDto.invoiceId", target = "invoice.invoiceId")
-	@Mapping(source = "invoiceDetailDto.productId", target = "product.productId")
-	@Mapping(source = "invoiceDetailDto.quantity", target = "quantity")
-	@Mapping(target = "invoiceDetailDto.salePrice", ignore = true)
-	@Mapping(target = "invoiceDetailDto.productName", ignore = true)
-	InvoiceDetail toInvoiceDetail(InvoiceDetailDto invoiceDetailDto);
+	 	@Mapping(target = "product", source = "productId", qualifiedByName = "mapProductIdToProduct")
+	 	@Mapping(target = "invoice.invoiceId", source = "invoiceId")
+	    InvoiceDetail toEntity(InvoiceDetailDto detailDTO);
+	 	
+	    @Mapping(target = "productId", source = "product.productId")
+	    @Mapping(target = "invoiceId", source = "invoice.invoiceId")
+	    @Mapping(target = "productName", source = "product.productName")
+	    @Mapping(target = "originalPrice", source = "product.originalPrice")
+	    @Mapping(target = "salePrice", source = "product.salePrice")
+	    InvoiceDetailDto toDTO(InvoiceDetail detail);
+
+	    List<InvoiceDetail> toEntities(List<InvoiceDetailDto> detailDTOs);
+
+	    List<InvoiceDetailDto> toDTOs(List<InvoiceDetail> details);
+
+	    @Named("mapProductIdToProduct")
+	    static Product mapProductIdToProduct(Integer productId) {
+	        Product product = new Product();
+	        product.setProductId(productId);
+	        return product;
+	    }
 
 }

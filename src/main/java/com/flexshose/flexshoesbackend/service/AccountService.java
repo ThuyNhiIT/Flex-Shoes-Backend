@@ -3,6 +3,7 @@ package com.flexshose.flexshoesbackend.service;
 import java.util.List;
 
 import com.flexshose.flexshoesbackend.dto.AccountDTO;
+import com.flexshose.flexshoesbackend.entity.Customer;
 import com.flexshose.flexshoesbackend.exception.MyAppException;
 
 public interface AccountService {

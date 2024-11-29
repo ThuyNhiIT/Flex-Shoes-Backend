@@ -38,19 +38,11 @@ public class InvoiceController {
 		return new ResponseEntity<>(invoices, HttpStatus.OK).getBody();
 	}
 
-	// API để tạo mới hóa đơn (POST /api/invoices)
-//    @PostMapping
-//    public ResponseEntity<InvoiceDto> createInvoice(@RequestBody InvoiceDto invoiceDto) {
-//        InvoiceDto createdInvoice = invoiceService.createInvoiceFormOrder(invoiceDto);
-//        // Kiểm tra ID trước khi trả về
-//        System.out.println("Invoice ID sent to client: " + createdInvoice.getInvoiceId());
-//        return ResponseEntity.status(HttpStatus.CREATED).body(createdInvoice);
-//    }
 
 //	 Tạo hóa đơn mới
     @PostMapping("/add")
-    public ResponseEntity<Invoice> createInvoice1(@RequestBody InvoiceDto invoiceDto) {
-        Invoice invoice = invoiceService.saveInvoice(invoiceDto);
+    public ResponseEntity<InvoiceDto> createInvoice1(@RequestBody InvoiceDto invoiceDto) {
+        InvoiceDto invoice = invoiceService.saveInvoice(invoiceDto);
         return ResponseEntity.ok(invoice);
     }
 
@@ -95,12 +87,6 @@ public class InvoiceController {
 	@GetMapping("/findById/{id}")
 	public MyAPIResponse<InvoiceDto> findByID(@PathVariable Integer id) {
 		return MyAPIResponse.<InvoiceDto>builder().result(invoiceService.getInvoice(id)).build();
-	}
-
-	@GetMapping("/findDetailById/{id}")
-	public MyAPIResponse<List<InvoiceDetailDto>> findDetailByID(@PathVariable Integer id) {
-		List<InvoiceDetailDto> list = detailService.getInvoiceDetail(id);
-		return MyAPIResponse.<List<InvoiceDetailDto>>builder().result(list).build();
 	}
 	@PutMapping("/updateInvoice")
 	public MyAPIResponse<Boolean> updateInvoice(@RequestBody InvoiceDto invoiceDto) {

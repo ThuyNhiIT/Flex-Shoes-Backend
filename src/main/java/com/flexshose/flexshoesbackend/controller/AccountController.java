@@ -73,7 +73,12 @@ public class AccountController {
         MyAPIResponse<String> result = new MyAPIResponse<String>();
         result.setResult(accountService.delete(id));
         return result;
-        
+	}
+	@GetMapping("/getMyInfor")
+	public MyAPIResponse<AccountDTO> getMyInfor() throws MyAppException {
+		MyAPIResponse<AccountDTO> result = new MyAPIResponse<AccountDTO>();
+		result.setResult(accountService.getMyInfor());
+		return result;
 	}
 }
 

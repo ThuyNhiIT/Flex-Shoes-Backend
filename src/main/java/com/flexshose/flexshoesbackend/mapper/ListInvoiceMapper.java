@@ -5,6 +5,8 @@ import com.flexshose.flexshoesbackend.entity.Invoice;
 import com.flexshose.flexshoesbackend.entity.InvoiceDetail;
 import com.flexshose.flexshoesbackend.entity.Product;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

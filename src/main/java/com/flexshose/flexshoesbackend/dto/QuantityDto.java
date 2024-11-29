@@ -21,11 +21,7 @@ public class QuantityDto {
     private Size size;
     private int quantity;
 
-//
-//    private Integer productId;
-//    private Integer colorId;
-//    private Integer sizeId;
-//    private int quantity;
+
 
 
 
