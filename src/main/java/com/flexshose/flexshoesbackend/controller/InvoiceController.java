@@ -135,5 +135,15 @@ public class InvoiceController {
 //        double totalAmount = invoiceService.getTotalAmount();
 //        return ResponseEntity.ok(totalAmount);
 //    }
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<InvoiceDto>> searchInvoices(
+	        @RequestParam(required = false) Integer id,
+	        @RequestParam(required = false) String customerName,
+	        @RequestParam(required = false) String orderStatus) {
+	    List<InvoiceDto> invoices = invoiceService.searchInvoices(id, customerName, orderStatus);
+	    return ResponseEntity.ok(invoices);
+	}
+
 }
 

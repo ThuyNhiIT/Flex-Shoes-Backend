@@ -99,28 +99,43 @@ public class InvoiceServiceImpl implements InvoiceService {
 		return detailRepository.findDetailByInvoiceId(invoice);
 	}
 
-	@Override
-	public List<InvoiceDto> getRecentInvoices() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	 @Override
+	    public List<InvoiceDto> getRecentInvoices() {
+	        // Lấy tất cả hóa đơn, sắp xếp theo ngày phát hành giảm dần
+	        return invoiceRepository.findAll(Sort.by(Sort.Direction.DESC, "issueDate"))
+	                .stream()
+	                .map(InvoiceMapper::mapToInvoiceDto)
+	                .toList();
+	    }
 
-	@Override
-	public long getTotalOrderCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public long getTotalShippingOrders() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		// Lấy tổng số đơn đặt hàng
+	    @Override
+	    public long getTotalOrderCount() {
+	        return invoiceRepository.count(); // Trả về tổng số đơn hàng
+	    }
 
-	@Override
-	public double getTotalAmount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	    // Lấy tổng số đơn đang vận chuyển
+	    @Override
+	    public long getTotalShippingOrders() {
+	        return invoiceRepository.countByOrderStatus("Processing"); // Tổng số đơn hàng có trạng thái "Processing"
+	    }
+
+	    // Lấy tổng tiền của tất cả các hóa đơn
+	    @Override
+	    public double getTotalAmount() {
+	        return invoiceRepository.sumTotalAmount(); // Trả về tổng số tiền từ tất cả các hóa đơn
+	    }
+
+		@Override
+		public List<InvoiceDto> searchInvoices(Integer id, String customerName, String orderStatus) {
+			// TODO Auto-generated method stub
+			return invoiceRepository.searchInvoices(id, customerName, orderStatus)
+		            .stream()
+		            .map(InvoiceMapper::mapToInvoiceDto) // Chuyển đổi Entity sang DTO
+		            .toList();
+		}
+	    
+	    
 
 }

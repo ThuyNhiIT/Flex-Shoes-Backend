@@ -18,4 +18,6 @@ public interface InvoiceService {
     InvoiceDto getInvoice(Integer id);
     List<InvoiceDetail> getInvoiceDetail(Integer invoiceId);
     Boolean updateOrderStatus(Integer invoiceId, String newStatus);
+    
+    public List<InvoiceDto> searchInvoices(Integer id, String customerName, String orderStatus); 
 }
