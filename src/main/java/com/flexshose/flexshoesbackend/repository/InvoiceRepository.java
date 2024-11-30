@@ -14,4 +14,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 
     @Query("SELECT SUM(i.total) FROM Invoice i") // Trả về tổng tiền của tất cả các hóa đơn
     double sumTotalAmount();
+    
+    
 }

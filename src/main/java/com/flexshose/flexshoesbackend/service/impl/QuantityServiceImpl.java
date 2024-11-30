@@ -2,13 +2,23 @@ package com.flexshose.flexshoesbackend.service.impl;
 
 import com.flexshose.flexshoesbackend.dto.QuantityDTOv2;
 import com.flexshose.flexshoesbackend.dto.QuantityDto;
+import com.flexshose.flexshoesbackend.dto.request.QuantityRequest;
+import com.flexshose.flexshoesbackend.entity.Color;
+import com.flexshose.flexshoesbackend.entity.Product;
 import com.flexshose.flexshoesbackend.entity.Quantity;
+import com.flexshose.flexshoesbackend.entity.Size;
 import com.flexshose.flexshoesbackend.mapper.QuantityMapper;
 import com.flexshose.flexshoesbackend.mapper.QuantityMapperv2;
+import com.flexshose.flexshoesbackend.repository.ColorRepository;
 import com.flexshose.flexshoesbackend.repository.ProductRepository;
 import com.flexshose.flexshoesbackend.repository.QuantityRepository;
+import com.flexshose.flexshoesbackend.repository.SizeRepository;
 import com.flexshose.flexshoesbackend.service.QuantityService;
+
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,12 +26,15 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class QuantityServiceImpl implements QuantityService {
 
-	private final QuantityRepository quantityRepository;
-	private final ProductRepository productRepository;
-	private final QuantityMapperv2 quantityMapperv2;
+	QuantityRepository quantityRepository;
+	ProductRepository productRepository;
+	ColorRepository colorRepository;
+	SizeRepository sizeRepository;
+	QuantityMapperv2 quantityMapperv2;
 
 	@Override
 	public QuantityDto createQuantity(QuantityDto quantityDto) {
@@ -63,6 +76,28 @@ public class QuantityServiceImpl implements QuantityService {
 		Quantity quantity = quantityMapperv2.toEntity(quantityDto);
 		quantity.setId(id);
 		return quantityMapperv2.toDTO(quantityRepository.save(quantity));
+	}
+
+	@Override
+	public Boolean updateQuantityAfterCheckout(List<QuantityRequest> quantityRequests) {
+		try {
+			for (QuantityRequest detail : quantityRequests) {
+                Color color = colorRepository.findByColorName(detail.getColorName());
+                Size size = sizeRepository.findBySizeName(detail.getSizeName());
+                Product product = productRepository.findByProductId(detail.getProductId());
+				
+				Quantity quantity = quantityRepository.findByProductAndColorAndSize(
+                                               product, color, size);
+                quantity.setQuantity(quantity.getQuantity() - detail.getQuantity());
+                quantityRepository.save(quantity);
+               
+			}
+			 return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

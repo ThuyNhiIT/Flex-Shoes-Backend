@@ -5,10 +5,10 @@ import com.flexshose.flexshoesbackend.dto.ProductDTOv2;
 import com.flexshose.flexshoesbackend.dto.ProductDto;
 import com.flexshose.flexshoesbackend.dto.QuantityDTOv2;
 import com.flexshose.flexshoesbackend.dto.QuantityDto;
+import com.flexshose.flexshoesbackend.dto.request.QuantityRequest;
 import com.flexshose.flexshoesbackend.entity.Brand;
 import com.flexshose.flexshoesbackend.entity.Color;
 import com.flexshose.flexshoesbackend.entity.ProductCategory;
-import com.flexshose.flexshoesbackend.mapper.ProductMapperv2;
 import com.flexshose.flexshoesbackend.service.BrandService;
 import com.flexshose.flexshoesbackend.service.ColorService;
 import com.flexshose.flexshoesbackend.service.ProductCategoryService;
@@ -36,7 +36,6 @@ public class ProductController {
 	BrandService brandService;
 	ColorService colorService;
 	ProductCategoryService productCategoryService;
-	ProductMapperv2 productMapperv2;
 
 	@PostMapping("/create")
 	public ResponseEntity<AddProductDto> createProduct(@RequestBody AddProductDto addProductDto) {
@@ -66,6 +65,11 @@ public class ProductController {
 		QuantityDto updatedQuantity = quantityService.updateQuantity(quantityDto);
 		return new ResponseEntity<>(updatedQuantity, HttpStatus.OK);
 	}
+	 @PutMapping("/updateQuantityAfterCheckout")
+		public ResponseEntity<Boolean> updateQuantityAfterCheckout(@RequestBody List<QuantityRequest> invoiceDetailDtos) {
+		 Boolean result = quantityService.updateQuantityAfterCheckout(invoiceDetailDtos);
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		}
 	@DeleteMapping("/deleteQuantity/{id}")
 	public ResponseEntity<Boolean> deleteQuantity(@PathVariable Integer id) {
         Boolean result = quantityService.deleteQuantity(id);
