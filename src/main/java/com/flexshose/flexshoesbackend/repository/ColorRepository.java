@@ -8,5 +8,5 @@ import com.flexshose.flexshoesbackend.entity.Color;
 
 @Repository
 public interface ColorRepository extends JpaRepository<Color, Integer> {
-
+	Color findByColorName(String name);
 }

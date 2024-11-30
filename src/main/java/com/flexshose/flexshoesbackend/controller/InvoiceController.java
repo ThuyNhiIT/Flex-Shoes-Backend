@@ -1,13 +1,8 @@
 package com.flexshose.flexshoesbackend.controller;
 
-import com.flexshose.flexshoesbackend.dto.InvoiceDetailDto;
+
 import com.flexshose.flexshoesbackend.dto.InvoiceDto;
 import com.flexshose.flexshoesbackend.dto.response.MyAPIResponse;
-import com.flexshose.flexshoesbackend.entity.Invoice;
-import com.flexshose.flexshoesbackend.entity.InvoiceDetail;
-import com.flexshose.flexshoesbackend.mapper.InvoiceDetailMapper;
-import com.flexshose.flexshoesbackend.mapper.InvoiceMapper;
-import com.flexshose.flexshoesbackend.service.InvoiceDetailService;
 import com.flexshose.flexshoesbackend.service.InvoiceService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +22,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class InvoiceController {
 	InvoiceService invoiceService;
-	InvoiceDetailMapper detailMapper;
-	InvoiceMapper invoiceMapper;
-	InvoiceDetailService detailService;
 
 	// Lay all hoa don
 	@GetMapping

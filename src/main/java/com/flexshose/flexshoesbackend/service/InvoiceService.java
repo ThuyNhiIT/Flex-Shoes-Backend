@@ -1,5 +1,6 @@
 package com.flexshose.flexshoesbackend.service;
 
+import com.flexshose.flexshoesbackend.dto.InvoiceDetailDto;
 import com.flexshose.flexshoesbackend.dto.InvoiceDto;
 import com.flexshose.flexshoesbackend.entity.Invoice;
 
@@ -25,5 +26,6 @@ public interface InvoiceService {
     Boolean updateOrderStatus(Integer invoiceId, String newStatus);
     
     boolean updateInvoice(InvoiceDto invoiceDto);
+
     
 }

@@ -11,7 +11,6 @@ import com.flexshose.flexshoesbackend.repository.ProductRepository;
 import com.flexshose.flexshoesbackend.service.ProductService;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ProductServiceImpl implements ProductService {
 
-	ProductRepository productRepository; // Thêm final ở đây
+	ProductRepository productRepository;
 	ProductMapperv2 productMapper;
 
 	@Override

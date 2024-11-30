@@ -7,5 +7,5 @@ import com.flexshose.flexshoesbackend.entity.Brand;
 
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, String> {
-	
+	Brand findByBrandName(String name);
 }
