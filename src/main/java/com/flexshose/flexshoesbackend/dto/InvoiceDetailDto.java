@@ -14,7 +14,7 @@ public class InvoiceDetailDto {
 	int quantity;
 	
 	//ProductDto product;
-	String productName;
-	double originalPrice;
-	double salePrice;
+//	String productName;
+//	double originalPrice;
+//	double salePrice;
 }

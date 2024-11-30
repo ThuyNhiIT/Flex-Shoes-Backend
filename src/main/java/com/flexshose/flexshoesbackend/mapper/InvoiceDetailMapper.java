@@ -19,9 +19,9 @@ public interface InvoiceDetailMapper {
 	 	
 	    @Mapping(target = "productId", source = "product.productId")
 	    @Mapping(target = "invoiceId", source = "invoice.invoiceId")
-	    @Mapping(target = "productName", source = "product.productName")
-	    @Mapping(target = "originalPrice", source = "product.originalPrice")
-	    @Mapping(target = "salePrice", source = "product.salePrice")
+//	    @Mapping(target = "productName", source = "product.productName")
+//	    @Mapping(target = "originalPrice", source = "product.originalPrice")
+//	    @Mapping(target = "salePrice", source = "product.salePrice")
 	    InvoiceDetailDto toDTO(InvoiceDetail detail);
 
 	    List<InvoiceDetail> toEntities(List<InvoiceDetailDto> detailDTOs);
