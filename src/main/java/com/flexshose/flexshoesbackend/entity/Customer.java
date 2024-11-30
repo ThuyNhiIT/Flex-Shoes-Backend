@@ -16,16 +16,10 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "CUSTOMER")
-
 public class Customer implements Serializable {
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 1L;
 
-	/**
-     *
-     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +39,9 @@ public class Customer implements Serializable {
 
     @Column(name = "REGISTER_DATE")
     private LocalDate registerDate;
+    
+    @Column(name = "GENDER")
+    private String gender;
 
     @ElementCollection
     @CollectionTable(name = "ADDRESS", joinColumns =  @JoinColumn(name = "CUSTOMER_ID"))

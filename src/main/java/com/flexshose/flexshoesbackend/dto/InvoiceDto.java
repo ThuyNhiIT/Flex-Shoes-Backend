@@ -1,13 +1,27 @@
 package com.flexshose.flexshoesbackend.dto;
 
-import lombok.*;
+import java.time.LocalDate;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class InvoiceDto {
-    private Integer invoiceId;
-    private double total;
+	     Integer invoiceId;
+	     LocalDate issueDate;
+	     String receiverNumber;
+	     String receiverName;
+	     String receiverAddress;
+	     String paymentMethod;
+	     String deliveryMethod;
+	     String orderStatus;
+	     double total;
+	     Integer customerId;
+	     List<InvoiceDetailDto> invoiceDetails;
+
 }

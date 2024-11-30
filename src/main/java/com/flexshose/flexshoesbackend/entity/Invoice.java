@@ -5,6 +5,9 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -24,6 +27,7 @@ public class Invoice implements Serializable {
     private Integer invoiceId;
 
     @Column(name = "ISSUE_DATE")
+    @Temporal(TemporalType.DATE)
     private LocalDate issueDate;
 
     @Column(name = "RECEIVER_NUMBER", columnDefinition = "nvarchar(12)")
@@ -51,7 +55,16 @@ public class Invoice implements Serializable {
     private double total;
 
     // Mapping to Customer
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER) // Chuyển sang EAGER loading
     @JoinColumn(name = "CUSTOMER_ID", nullable = true)
     private Customer customer;
+
+
+    // One-to-many relationship with InvoiceDetail (a single invoice can have multiple invoice details)
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Column(name = "INVOICE_DETAILS", nullable = true)
+    private List<InvoiceDetail> invoiceDetails;
+
+
+
 }
