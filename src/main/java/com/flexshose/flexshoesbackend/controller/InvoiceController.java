@@ -100,12 +100,12 @@ public class InvoiceController {
 		return MyAPIResponse.<InvoiceDto>builder().result(invoiceService.getInvoice(id)).build();
 	}
 
-	@GetMapping("/findDetailById/{id}")
-	public MyAPIResponse<List<InvoiceDetailDto>> findDetailByID(@PathVariable Integer id) {
-		List<InvoiceDetail> list = invoiceService.getInvoiceDetail(id);
-		List<InvoiceDetailDto> listDto = list.stream().map(item -> detailMapper.toInvoiceDetailDTO(item)).toList();
-		return MyAPIResponse.<List<InvoiceDetailDto>>builder().result(listDto).build();
-	}
+//	@GetMapping("/findDetailById/{id}")
+//	public MyAPIResponse<List<InvoiceDetailDto>> findDetailByID(@PathVariable Integer id) {
+//		List<InvoiceDetail> list = invoiceService.getInvoiceDetail(id);
+//		List<InvoiceDetailDto> listDto = list.stream().map(item -> detailMapper.toInvoiceDetailDTO(item)).toList();
+//		return MyAPIResponse.<List<InvoiceDetailDto>>builder().result(listDto).build();
+//	}
 
     
     

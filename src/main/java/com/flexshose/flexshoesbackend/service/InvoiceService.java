@@ -27,7 +27,6 @@ public interface InvoiceService {
 
     boolean updateInvoice(InvoiceDto invoiceDto);
 
+    List<InvoiceDto> searchInvoices(Integer id, String customerName, String orderStatus);
 
-
-    public List<InvoiceDto> searchInvoices(Integer id, String customerName, String orderStatus);
 }
