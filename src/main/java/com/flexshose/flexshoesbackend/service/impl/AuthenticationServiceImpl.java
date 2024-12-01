@@ -73,7 +73,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				throw new MyAppException(ErrorCode.INVALID_PASSWORD);
 
 			String token = generateToken(account);
-			return AuthenticationResponse.builder().authenticated(true).token(token).role(role.toString()).build();
+			AuthenticationResponse response =  new AuthenticationResponse();
+			response.setAuthenticated(true);
+			response.setToken(token);
+			response.setRole(role.toString());
+					
+				if(account.getCustomer() != null)
+					response.setCustomerId(account.getCustomer().getCustomerId());
+			
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MyAppException(ErrorCode.ACTION_FAILD);
