@@ -18,7 +18,11 @@ public class ProductDetailMapper {
         productDetailDto.setProductId(product.getProductId());
         productDetailDto.setProductName(product.getProductName());
         productDetailDto.setDescription(product.getDescription());
-        productDetailDto.setSalePrice(product.getSalePrice());
+//        productDetailDto.setSalePrice(product.getSalePrice());
+        // Tính giá cuối cùng
+        double finalPrice = (product.getOriginalPrice() - (product.getOriginalPrice() * product.getSalePrice() / 100)) * (1 + product.getVat() / 100);
+        finalPrice = Math.round(finalPrice * 100.0) / 100.0; // Làm tròn 2 chữ số thập phân
+        productDetailDto.setFinalPrice(finalPrice);
         productDetailDto.setStatus(product.getStatus());
         productDetailDto.setImages(List.copyOf(product.getImages()));
 
