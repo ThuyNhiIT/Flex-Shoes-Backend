@@ -9,9 +9,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class ListInvoiceDto {
+    private int invoiceId;
     private LocalDate issueDate;
     private String productName;
     private String image;
     private int quantity;
     private double total;
+    private String orderStatus;
 }
