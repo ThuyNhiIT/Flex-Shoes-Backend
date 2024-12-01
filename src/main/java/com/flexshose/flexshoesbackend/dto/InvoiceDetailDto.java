@@ -13,8 +13,8 @@ public class InvoiceDetailDto {
 	Integer productId;
 	int quantity;
 	
-	//ProductDto product;
-//	String productName;
-//	double originalPrice;
-//	double salePrice;
+//	ProductDto product;
+	String productName;
+	double originalPrice;
+	double salePrice;
 }
