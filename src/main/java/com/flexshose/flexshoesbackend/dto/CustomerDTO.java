@@ -17,18 +17,18 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerDTO {
 
-	Integer customerId;
+    Integer customerId;
 
-	String customerName;
+    String customerName;
 
-	String phoneNumber;
+    String phoneNumber;
 
-	String email;
+    String email;
 
-	String gender;
-	
-	LocalDate registerDate;
+    String gender;
 
-	Set<String> address;
+    LocalDate registerDate;
+
+    Set<String> address;
 
 }
