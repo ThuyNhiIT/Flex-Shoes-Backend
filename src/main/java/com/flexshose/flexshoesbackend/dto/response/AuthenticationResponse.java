@@ -16,5 +16,6 @@ public class AuthenticationResponse {
     boolean authenticated;
     String token;
     String role;
-    
+    Integer customerId;
+
 }

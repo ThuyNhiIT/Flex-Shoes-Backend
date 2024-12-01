@@ -73,7 +73,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				throw new MyAppException(ErrorCode.INVALID_PASSWORD);
 
 			String token = generateToken(account);
-			return AuthenticationResponse.builder().authenticated(true).token(token).role(role.toString()).build();
+			AuthenticationResponse response =  new AuthenticationResponse();
+			response.setAuthenticated(true);
+			response.setToken(token);
+			response.setRole(role.toString());
+
+			if(account.getCustomer() != null)
+				response.setCustomerId(account.getCustomer().getCustomerId());
+
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MyAppException(ErrorCode.ACTION_FAILD);
@@ -147,7 +155,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 		Date expiryTime = (isRefresh)
 				? new Date(signedJWT.getJWTClaimsSet().getIssueTime().toInstant()
-						.plus(REFRESHABLE_DURATION, ChronoUnit.SECONDS).toEpochMilli())
+				.plus(REFRESHABLE_DURATION, ChronoUnit.SECONDS).toEpochMilli())
 				: signedJWT.getJWTClaimsSet().getExpirationTime();
 
 		boolean valid = signedJWT.verify(verifier);
@@ -175,7 +183,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		String username = signedJWT.getJWTClaimsSet().getSubject();
 
 		Account user = accountRepository.findByUsername(username).orElseThrow(() -> new MyAppException(ErrorCode.UNAUTHENTICATED));
-			
+
 		var token = generateToken(user);
 
 		return AuthenticationResponse.builder().token(token).authenticated(true).build();
