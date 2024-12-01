@@ -33,29 +33,13 @@ public class InvoiceController {
 		return new ResponseEntity<>(invoices, HttpStatus.OK).getBody();
 	}
 
-	// API để tạo mới hóa đơn (POST /api/invoices)
-//    @PostMapping
-//    public ResponseEntity<InvoiceDto> createInvoice(@RequestBody InvoiceDto invoiceDto) {
-//        InvoiceDto createdInvoice = invoiceService.createInvoiceFormOrder(invoiceDto);
-//        // Kiểm tra ID trước khi trả về
-//        System.out.println("Invoice ID sent to client: " + createdInvoice.getInvoiceId());
-//        return ResponseEntity.status(HttpStatus.CREATED).body(createdInvoice);
-//    }
 
-	// Tạo hóa đơn mới
-//    @PostMapping
-//    public ResponseEntity<Map<String, Object>> createInvoice(@RequestBody InvoiceDto invoiceDto) {
-//        Invoice invoice = InvoiceMapper.mapToInvoice(invoiceDto);
-//        invoice.setOrderStatus("Processing"); // Đặt trạng thái mặc định là Processing
-//        Invoice savedInvoice = invoiceService.saveInvoice(invoice);
-//
-//        Map<String, Object> response = new HashMap<>();
-//        response.put("id", savedInvoice.getInvoiceId());
-//        response.put("orderStatus", savedInvoice.getOrderStatus());
-//        response.put("message", "Invoice created successfully");
-//
-//        return ResponseEntity.ok(response);
-//    }
+//	 Tạo hóa đơn mới
+    @PostMapping("/add")
+    public ResponseEntity<InvoiceDto> createInvoice1(@RequestBody InvoiceDto invoiceDto) {
+        InvoiceDto invoice = invoiceService.saveInvoice(invoiceDto);
+        return ResponseEntity.ok(invoice);
+    }
 
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> createInvoice(@RequestBody InvoiceDto invoiceDto) {
@@ -99,42 +83,10 @@ public class InvoiceController {
 	public MyAPIResponse<InvoiceDto> findByID(@PathVariable Integer id) {
 		return MyAPIResponse.<InvoiceDto>builder().result(invoiceService.getInvoice(id)).build();
 	}
-
-//	@GetMapping("/findDetailById/{id}")
-//	public MyAPIResponse<List<InvoiceDetailDto>> findDetailByID(@PathVariable Integer id) {
-//		List<InvoiceDetail> list = invoiceService.getInvoiceDetail(id);
-//		List<InvoiceDetailDto> listDto = list.stream().map(item -> detailMapper.toInvoiceDetailDTO(item)).toList();
-//		return MyAPIResponse.<List<InvoiceDetailDto>>builder().result(listDto).build();
-//	}
-
-    
-    
-//    @GetMapping("/recent")
-//    public ResponseEntity<List<InvoiceDto>> getRecentInvoices() {
-//        List<InvoiceDto> recentInvoices = invoiceService.getRecentInvoices();
-//        return ResponseEntity.ok(recentInvoices);
-//    }
-//    
-// // Trả về tổng số đơn đặt hàng
-//    @GetMapping("/total")
-//    public ResponseEntity<Long> getTotalOrderCount() {
-//        long totalOrders = invoiceService.getTotalOrderCount();
-//        return ResponseEntity.ok(totalOrders);
-//    }
-//
-//    // Trả về tổng số đơn đang vận chuyển (Processing)
-//    @GetMapping("/shipping")
-//    public ResponseEntity<Long> getTotalShippingOrders() {
-//        long totalShipping = invoiceService.getTotalShippingOrders();
-//        return ResponseEntity.ok(totalShipping);
-//    }
-//
-//    // Trả về tổng số tiền của tất cả các hóa đơn
-//    @GetMapping("/total-amount")
-//    public ResponseEntity<Double> getTotalAmount() {
-//        double totalAmount = invoiceService.getTotalAmount();
-//        return ResponseEntity.ok(totalAmount);
-//    }
+	@PutMapping("/updateInvoice")
+	public MyAPIResponse<Boolean> updateInvoice(@RequestBody InvoiceDto invoiceDto) {
+		return MyAPIResponse.<Boolean>builder().result(invoiceService.updateInvoice(invoiceDto)).build();
+	}
 	
 	@GetMapping("/search")
 	public ResponseEntity<List<InvoiceDto>> searchInvoices(
