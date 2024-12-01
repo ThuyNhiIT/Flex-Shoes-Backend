@@ -84,7 +84,14 @@ public class InvoiceController {
 	public MyAPIResponse<Boolean> updateInvoice(@RequestBody InvoiceDto invoiceDto) {
 		return MyAPIResponse.<Boolean>builder().result(invoiceService.updateInvoice(invoiceDto)).build();
 	}
-
+	@GetMapping("/search")
+	public ResponseEntity<List<InvoiceDto>> searchInvoices(
+			@RequestParam(required = false) Integer id,
+			@RequestParam(required = false) String customerName,
+			@RequestParam(required = false) String orderStatus) {
+		List<InvoiceDto> invoices = invoiceService.searchInvoices(id, customerName, orderStatus);
+		return ResponseEntity.ok(invoices);
+	}
  
 }
 
